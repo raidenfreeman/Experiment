@@ -1,0 +1,5 @@
+﻿internal interface ICookable
+{
+
+}
+
