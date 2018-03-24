@@ -8,35 +8,39 @@ using UnityEngine;
 /// </summary>
 public class Dispenser : PlacementSurface
 {
+    /// <summary>
+    /// This item will be set as the item to dispense OnAwake(). MUST HAVE IPickableItem component.
+    /// </summary>
+    /// <remarks>This exists, because you can't set through the inspector,
+    /// fields/properties of interface types (like itemToDispense).</remarks>
+    public GameObject pickableItemToDispenseAddedOnAwake;
+
     [SerializeField]
-    private GameObject itemToDispense;
+    private IPickableItem itemToDispense;
 
     [SerializeField]
     private int initialPoolCount = 15;
 
-    private Stack<GameObject> itemPool = new Stack<GameObject>();
+    private Stack<IPickableItem> itemPool = new Stack<IPickableItem>();
 
     public override IPickableItem TryPickUpItem()
     {
-        if(base.placedItem == null)
+        if (base.placedItem == null)
         {
-            DispenseItem();
+            return DispenseItem();
         }
-        return base.TryPickUpItem();
+        else
+        {
+            return base.TryPickUpItem();
+        }
     }
 
     /// <summary>
     /// Get an item from the pool, and place it at anchor
     /// </summary>
     /// <returns>The reference to the placed object</returns>
-    public GameObject DispenseItem()
+    private IPickableItem DispenseItem()
     {
-        // If there is already a dispensed item, return that one
-        //if (itemPlacementAnchor?.childCount > 0)
-        //{
-        //    return itemPlacementAnchor.GetChild(0).gameObject;
-        //}
-
         // if the pool is empty
         if (itemPool.Count <= 0)
         {
@@ -45,34 +49,41 @@ public class Dispenser : PlacementSurface
         }
         // Give the top item of the stack
         var item = itemPool.Pop();
-        // Enable it
-        InitializeItem(item);
+        (item as MonoBehaviour).gameObject.SetActive(true);
         return item;
     }
 
     private void Awake()
     {
-        PopulatePool();
+        if (pickableItemToDispenseAddedOnAwake != null)
+        {
+            var item = pickableItemToDispenseAddedOnAwake.GetComponent<IPickableItem>();
+            if (item == null)
+            {
+                Debug.LogError(nameof(pickableItemPlacedOnAwake) + " does not contain a component that implements " + nameof(IPickableItem));
+                return;
+            }
+            else
+            {
+                itemToDispense = item;
+            }
+            PopulatePool();
+        }
+        else
+        {
+            Debug.LogError(nameof(pickableItemPlacedOnAwake) + " has no value in " + this.gameObject.ToString() + " in component " + nameof(Dispenser));
+        }
     }
 
     private void PopulatePool()
     {
+        var gameObject = (itemToDispense as MonoBehaviour).gameObject;
         for (int i = 0; i < initialPoolCount; i++)
         {
             // Create a new item, as a child of the anchor
-            var item = Instantiate(itemToDispense);
-            item.gameObject.SetActive(false);
-            itemPool.Push(item);
+            var item = Instantiate(gameObject);
+            item.SetActive(false);
+            itemPool.Push(item.GetComponent<IPickableItem>());
         }
-    }
-
-    private void InitializeItem(GameObject item)
-    {
-        var itemRigidbody = item.GetComponent<Rigidbody>();
-        if (itemRigidbody != null)
-        {
-            itemRigidbody.constraints = RigidbodyConstraints.FreezeAll;
-        }
-        item.gameObject.SetActive(true);
     }
 }

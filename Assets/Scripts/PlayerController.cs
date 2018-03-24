@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UniRx;
+using InControl;
 
 public class PlayerController : MonoBehaviour
 {
@@ -40,6 +41,13 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
+        //if (InputManager.ActiveDevice.Action2)
+        //{
+        //    rigidbody.AddForce(transform.forward * 3);
+        //}
+        //else
+        //{
+
         // Store the input axes.
         float h = Input.GetAxisRaw("Horizontal");
         float v = Input.GetAxisRaw("Vertical");
@@ -48,7 +56,8 @@ public class PlayerController : MonoBehaviour
         Move(h, v);
 
         // Turn the player to face the mouse cursor.
-        Turning();
+        //Turning();
+        //}
     }
 
     void Move(float h, float v)
@@ -61,6 +70,10 @@ public class PlayerController : MonoBehaviour
 
         // Move the player to it's current position plus the movement.
         rigidbody.MovePosition(transform.position + movement);
+        if (movement != Vector3.zero)
+        {
+            rigidbody.MoveRotation(Quaternion.LookRotation(movement, Vector3.up));
+        }
     }
 
     void Turning()
@@ -89,61 +102,61 @@ public class PlayerController : MonoBehaviour
     }
 
     // Use this for initialization
-//    void Start()
-//    {
-//        var mainCameraTransform = Camera.main?.transform ?? this.transform;
-//        rigidbody = GetComponent<Rigidbody>();
-//        Observable.EveryFixedUpdate().Select(_ => Input.GetAxis("Horizontal")).Subscribe(x =>
-//        {
-//#if UNITY_EDITOR
-//            hAxis.text = x.ToString();
-//#endif
-//            /*
-//            float h = Input.GetAxis("Horizontal");
-//            float v = Input.GetAxis("Vertical");
-            
-//            // calculate move direction to pass to character
-//            // calculate camera relative direction to move:
-//            var mainCameraForward = Vector3.Scale(mainCameraTransform.forward, new Vector3(1, 0, 1)).normalized;
-//            var move = v * mainCameraForward + h * mainCameraTransform.right;
+    //    void Start()
+    //    {
+    //        var mainCameraTransform = Camera.main?.transform ?? this.transform;
+    //        rigidbody = GetComponent<Rigidbody>();
+    //        Observable.EveryFixedUpdate().Select(_ => Input.GetAxis("Horizontal")).Subscribe(x =>
+    //        {
+    //#if UNITY_EDITOR
+    //            hAxis.text = x.ToString();
+    //#endif
+    //            /*
+    //            float h = Input.GetAxis("Horizontal");
+    //            float v = Input.GetAxis("Vertical");
 
-//            if (move.magnitude > 1f) move.Normalize();
-//            move = transform.InverseTransformDirection(move);
-//            CheckGroundStatus();
-//            move = Vector3.ProjectOnPlane(move, GroundNormal);
-//            //m_TurnAmount = Mathf.Atan2(move.x, move.z);
-//            //m_ForwardAmount = move.z;
-//            */
-//            var adsfsd = Vector3.right * Time.deltaTime * x * speed;
-//            rigidbody.MovePosition(transform.position + adsfsd);
-//        });
-//        Observable.EveryUpdate().Select(_ => Input.GetAxis("Vertical")).Subscribe(x =>
-//        {
-//#if UNITY_EDITOR
-//            vAxis.text = x.ToString();
-//#endif
-//            var ggwp = Vector3.forward * Time.deltaTime * x * speed;
-//            //rigidbody.MovePosition(transform.position + ggwp);
-//        });
-//        Observable.EveryUpdate().Select(_ => Input.GetAxis("Axis 3")).Subscribe(x =>
-//        {
-//#if UNITY_EDITOR
-//            hAxis2.text = x.ToString();
-//#endif
-//            var z = Input.GetAxis("Axis 6");
-//            if (z != 0 && x != 0)
-//            {
-//                transform.rotation = Quaternion.LookRotation(new Vector3(x, 0, z));
+    //            // calculate move direction to pass to character
+    //            // calculate camera relative direction to move:
+    //            var mainCameraForward = Vector3.Scale(mainCameraTransform.forward, new Vector3(1, 0, 1)).normalized;
+    //            var move = v * mainCameraForward + h * mainCameraTransform.right;
 
-//            }
-//        });
-//        Observable.EveryUpdate().Select(_ => Input.GetAxis("Axis 6")).Subscribe(x =>
-//        {
-//#if UNITY_EDITOR
-//            vAxis2.text = x.ToString();
-//#endif
-//        });
-//    }
+    //            if (move.magnitude > 1f) move.Normalize();
+    //            move = transform.InverseTransformDirection(move);
+    //            CheckGroundStatus();
+    //            move = Vector3.ProjectOnPlane(move, GroundNormal);
+    //            //m_TurnAmount = Mathf.Atan2(move.x, move.z);
+    //            //m_ForwardAmount = move.z;
+    //            */
+    //            var adsfsd = Vector3.right * Time.deltaTime * x * speed;
+    //            rigidbody.MovePosition(transform.position + adsfsd);
+    //        });
+    //        Observable.EveryUpdate().Select(_ => Input.GetAxis("Vertical")).Subscribe(x =>
+    //        {
+    //#if UNITY_EDITOR
+    //            vAxis.text = x.ToString();
+    //#endif
+    //            var ggwp = Vector3.forward * Time.deltaTime * x * speed;
+    //            //rigidbody.MovePosition(transform.position + ggwp);
+    //        });
+    //        Observable.EveryUpdate().Select(_ => Input.GetAxis("Axis 3")).Subscribe(x =>
+    //        {
+    //#if UNITY_EDITOR
+    //            hAxis2.text = x.ToString();
+    //#endif
+    //            var z = Input.GetAxis("Axis 6");
+    //            if (z != 0 && x != 0)
+    //            {
+    //                transform.rotation = Quaternion.LookRotation(new Vector3(x, 0, z));
+
+    //            }
+    //        });
+    //        Observable.EveryUpdate().Select(_ => Input.GetAxis("Axis 6")).Subscribe(x =>
+    //        {
+    //#if UNITY_EDITOR
+    //            vAxis2.text = x.ToString();
+    //#endif
+    //        });
+    //    }
 
     void CheckGroundStatus()
     {

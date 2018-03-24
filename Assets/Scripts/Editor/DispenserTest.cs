@@ -12,8 +12,9 @@ public class DispenserTest
     {
         var dispenser = new GameObject().AddComponent<Dispenser>();
         Assert.IsNull(dispenser.placedItem); // No items are placed
-        var dispensibleItem = new GameObject().AddComponent<FoodIngredient>().gameObject;
-        typeof(Dispenser).GetField("itemToDispense", BindingFlags.NonPublic | BindingFlags.Instance).SetValue(dispenser, dispensibleItem);
+        var dispensibleItem = new GameObject().AddComponent<FoodIngredient>();
+        typeof(Dispenser)
+            .GetField("itemToDispense", BindingFlags.NonPublic | BindingFlags.Instance).SetValue(dispenser, dispensibleItem);
         var dispensedItem = dispenser.TryPickUpItem();
         Assert.IsNotNull(dispensedItem); // It should have returned an item
         Assert.IsNull(dispenser.placedItem); // Placed item should be empty
@@ -24,7 +25,9 @@ public class DispenserTest
     {
         var dispenser = new GameObject().AddComponent<Dispenser>();
         var item = new GameObject().AddComponent<FoodIngredient>();
-        typeof(Dispenser).GetProperty("placedItem", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance).SetValue(dispenser, item);
+        typeof(Dispenser)
+            .GetProperty("placedItem", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)
+            .SetValue(dispenser, item);
         var pickedItem = dispenser.TryPickUpItem();
         Assert.AreSame(item, pickedItem);
     }
@@ -35,7 +38,9 @@ public class DispenserTest
         var dispenser = new GameObject().AddComponent<Dispenser>();
         var existingItem = new GameObject().AddComponent<FoodIngredient>();
         var newItem = new GameObject().AddComponent<FoodIngredient>();
-        typeof(Dispenser).GetProperty("placedItem", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance).SetValue(dispenser, existingItem);
+        typeof(Dispenser)
+            .GetProperty("placedItem", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)
+            .SetValue(dispenser, existingItem);
         var didPlaceItem = dispenser.TryPlaceItem(newItem);
         Assert.IsFalse(didPlaceItem);
         Assert.AreNotSame(newItem, dispenser.placedItem);
@@ -45,11 +50,11 @@ public class DispenserTest
     public void TryPlaceItem_NoItemPlaced_ReturnTruePlacedItemHasChanged()
     {
         var dispenser = new GameObject().AddComponent<Dispenser>();
-        Assert.IsNull(dispenser .placedItem);
+        Assert.IsNull(dispenser.placedItem);
         var newItem = new GameObject().AddComponent<FoodIngredient>();
-        var didPlaceItem = dispenser .TryPlaceItem(newItem);
+        var didPlaceItem = dispenser.TryPlaceItem(newItem);
         Assert.IsTrue(didPlaceItem);
-        Assert.AreSame(dispenser .placedItem, newItem);
+        Assert.AreSame(dispenser.placedItem, newItem);
     }
 
 
@@ -57,7 +62,7 @@ public class DispenserTest
 
     // =============================================================
 
-
+        /*
     [Test]
     public void TryPickUpItem_NoItemsPlaced_SuccessfulyReturnDispensedItem()
     {
@@ -109,5 +114,5 @@ public class DispenserTest
         var dispensedItem = dispenser.DispenseItem();
         Assert.IsNotNull(dispensedItem);
         Assert.AreSame(dispensedItem, dispensibleItemInAnchor); // Make sure it's the same item in the anchor
-    }
+    }*/
 }

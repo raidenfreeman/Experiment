@@ -114,7 +114,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1569359216584550}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.9626472, y: 0, z: 0.7183609}
+  m_LocalPosition: {x: 1, y: 0, z: 3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4531778283138918}
@@ -264,9 +264,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f1565a2e2d492540bc71779e7bae174, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dispendedItem: {fileID: 1450370113363866, guid: a847594c2e5e17d47a0e4e811d6ba04e,
-    type: 2}
-  itemPlacementAnchor: {fileID: 4974130135066164}
+  placementAnchor: {fileID: 4974130135066164}
   initialPoolCount: 15
 --- !u!114 &114868682166478656
 MonoBehaviour:

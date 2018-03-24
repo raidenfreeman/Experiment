@@ -3,6 +3,13 @@
 public class PlacementSurface : MonoBehaviour
 {
     /// <summary>
+    /// This item will be placed on the surface OnAwake(). MUST HAVE IPickableItem component.
+    /// </summary>
+    /// <remarks>This exists, because you can't set through the inspector,
+    /// fields/properties of interface types (like placedItem).</remarks>
+    public GameObject pickableItemPlacedOnAwake;
+
+    /// <summary>
     /// The transform point to put the placed item
     /// </summary>
     [SerializeField]
@@ -11,6 +18,7 @@ public class PlacementSurface : MonoBehaviour
     /// <summary>
     /// The item placed on the surface
     /// </summary>
+    [SerializeField]
     public IPickableItem placedItem { get; protected set; }
 
     /// <summary>
@@ -71,6 +79,26 @@ public class PlacementSurface : MonoBehaviour
             //    Debug.LogWarning("No rigidbody attached to IPickableItem: " + placedItem.ToString());
             //}
             //return placedItem;
+        }
+    }
+
+    private void Awake()
+    {
+        if (pickableItemPlacedOnAwake != null)
+        {
+            var item = pickableItemPlacedOnAwake.GetComponent<IPickableItem>();
+            if (item == null)
+            {
+                Debug.LogError(nameof(pickableItemPlacedOnAwake) + " does not contain a component that implements " + nameof(IPickableItem));
+                return;
+            }
+            else
+            {
+                pickableItemPlacedOnAwake.transform.parent = placementAnchor;
+                pickableItemPlacedOnAwake.transform.localPosition = Vector3.zero;
+                pickableItemPlacedOnAwake.transform.localRotation = Quaternion.identity;
+                placedItem = item;
+            }
         }
     }
 }
