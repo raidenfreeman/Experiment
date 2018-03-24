@@ -79,12 +79,12 @@ public class PlayerPickup : MonoBehaviour
         //var d
         //var e
 
-        if ((InputManager.ActiveDevice?.Action3?.WasPressed ?? false) && !isHoldingItem)
+        if ((InputManager.ActiveDevice?.Action3?.IsPressed ?? false) && !isHoldingItem)
         {
             //if (Input.GetKeyDown(KeyCode.F))
             //{
-            var surface = GetFacedObject()?.GetComponent<IInteractibleSurface>();
-
+            GetFacedObject()?.GetComponent<IInteractibleSurface>()?.TryInteract();
+            
             //var interactible = colliderSelected.gameObject.GetComponent<PickableItem>();
 
             //var angles = collidersHit.Select(x => Vector3.Angle(this.forwardReach, x.transform.position - this.transform.position)).ToArray();

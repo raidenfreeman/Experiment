@@ -15,7 +15,7 @@ public class FoodIngredient : MonoBehaviour, IPickableItem, IPreparable
     /// <summary>
     /// The time needed to complete preparing the item
     /// </summary>
-    public readonly float timeToPrepare = 3000;
+    public readonly float timeToPrepare = 5;
 
     /// <summary>
     /// How much % is completed
@@ -65,9 +65,10 @@ public class FoodIngredient : MonoBehaviour, IPickableItem, IPreparable
             timeSpentPreparing = timeToPrepare;
             PreparationComplete();
         }
+        sb?.UpdateBar(completionPercentage, 100);
         return completionPercentage;
     }
-
+    public SimpleHealthBar sb;
 
     /// <summary>
     /// Called when the item is prepared

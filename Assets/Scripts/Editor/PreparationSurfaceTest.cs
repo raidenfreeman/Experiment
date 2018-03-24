@@ -11,8 +11,8 @@ public class PreparationSurfaceTest
     public void TryInteract_NoItemOnSurface_ReturnFalse()
     {
         var surface = new GameObject().AddComponent<PreparationSurface>();
-        var placementSurface = new GameObject().AddComponent<PlacementSurface>();
-        typeof(PreparationSurface).GetField("placementSurface", BindingFlags.NonPublic | BindingFlags.Instance).SetValue(surface, placementSurface);
+        //var placementSurface = new GameObject().AddComponent<PlacementSurface>();
+        //typeof(PreparationSurface).GetField("placementSurface", BindingFlags.NonPublic | BindingFlags.Instance).SetValue(surface, placementSurface);
         Assert.IsFalse(surface.TryInteract());
     }
 
@@ -20,14 +20,11 @@ public class PreparationSurfaceTest
     public void TryInteract_NotInteractibleItemOnSurface_ReturnFalse()
     {
         var surface = new GameObject().AddComponent<PreparationSurface>();
-        var placementSurface = new GameObject().AddComponent<PlacementSurface>();
+        //var placementSurface = new GameObject().AddComponent<PlacementSurface>();
         var pot = new GameObject().AddComponent<Pot>();
-        typeof(PlacementSurface)
-            .GetProperty("item", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)
-            .SetValue(placementSurface, pot);
         typeof(PreparationSurface)
-            .GetField("placementSurface", BindingFlags.NonPublic | BindingFlags.Instance)
-            .SetValue(surface, placementSurface);
+            .GetProperty("placedItem", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)
+            .SetValue(surface, pot);
         Assert.IsFalse(surface.TryInteract());
     }
 
@@ -35,14 +32,10 @@ public class PreparationSurfaceTest
     public void TryInteract_NotPreparableItem_ReturnFalse()
     {
         var surface = new GameObject().AddComponent<PreparationSurface>();
-        var placementSurface = new GameObject().AddComponent<PlacementSurface>();
         var dish = new GameObject().AddComponent<Dish>();
-        typeof(PlacementSurface)
-            .GetProperty("item", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)
-            .SetValue(placementSurface, dish);
         typeof(PreparationSurface)
-            .GetField("placementSurface", BindingFlags.NonPublic | BindingFlags.Instance)
-            .SetValue(surface, placementSurface);
+            .GetProperty("placedItem", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)
+            .SetValue(surface, dish);
         Assert.IsFalse(surface.TryInteract());
     }
 
@@ -50,14 +43,10 @@ public class PreparationSurfaceTest
     public void TryInteract_InteractibleItemOnSurface_ReturnTrue()
     {
         var surface = new GameObject().AddComponent<PreparationSurface>();
-        var placementSurface = new GameObject().AddComponent<PlacementSurface>();
         var tomato = new GameObject().AddComponent<FoodIngredient>();
-        typeof(PlacementSurface)
-            .GetProperty("item", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)
-            .SetValue(placementSurface, tomato);
         typeof(PreparationSurface)
-            .GetField("placementSurface", BindingFlags.NonPublic | BindingFlags.Instance)
-            .SetValue(surface, placementSurface);
+            .GetProperty("placedItem", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)
+            .SetValue(surface, tomato);
         Assert.IsTrue(surface.TryInteract());
     }
 
@@ -65,14 +54,10 @@ public class PreparationSurfaceTest
     public IEnumerator TryInteract_InteractibleItemOnSurface_CompletionIncreased()
     {
         var surface = new GameObject().AddComponent<PreparationSurface>();
-        var placementSurface = new GameObject().AddComponent<PlacementSurface>();
         var tomato = new GameObject().AddComponent<FoodIngredient>();
-        typeof(PlacementSurface)
-            .GetProperty("item", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)
-            .SetValue(placementSurface, tomato);
         typeof(PreparationSurface)
-            .GetField("placementSurface", BindingFlags.NonPublic | BindingFlags.Instance)
-            .SetValue(surface, placementSurface);
+            .GetProperty("placedItem", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)
+            .SetValue(surface, tomato);
         var startingPercentage = tomato.completionPercentage;
         yield return null;
         surface.TryInteract();

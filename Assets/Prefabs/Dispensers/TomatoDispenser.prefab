@@ -264,7 +264,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f1565a2e2d492540bc71779e7bae174, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pickableItemPlacedOnAwake: {fileID: 0}
   placementAnchor: {fileID: 4974130135066164}
+  pickableItemToDispenseAddedOnAwake: {fileID: 1450370113363866, guid: a847594c2e5e17d47a0e4e811d6ba04e,
+    type: 2}
   initialPoolCount: 15
 --- !u!114 &114868682166478656
 MonoBehaviour:
