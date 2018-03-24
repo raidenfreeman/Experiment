@@ -23,7 +23,15 @@ public class PlayerPickup : MonoBehaviour
     [SerializeField]
     private Transform rightHand;
 
+    // TODO: Replace with animation on the final model
+    private readonly Vector3 leftHandHoldingPosition = new Vector3(-0.359f, 0, 0.752f);
+    private readonly Vector3 leftHandOriginalPosition = new Vector3(-0.6f, 0, 0.3f);
+    private readonly Vector3 rightHandHoldingPosition = new Vector3(0.359f, 0, 0.752f);
+    private readonly Vector3 rightHandOriginalPosition = new Vector3(0.6f, 0, 0.3f);
+
     private bool isHoldingItem { get { return holdingAnchor.childCount > 0; } }
+
+    private Transform heldItem { get { return holdingAnchor.GetChild(0); } }
 
     private Vector3 forwardReach
     {
@@ -31,11 +39,6 @@ public class PlayerPickup : MonoBehaviour
         {
             return transform.forward * reachRadius;
         }
-    }
-
-    void Start()
-    {
-        //heldItem.Value = new NoItem();
     }
 
     void OnDrawGizmosSelected()
@@ -88,24 +91,51 @@ public class PlayerPickup : MonoBehaviour
             //Debug.Log("Object Interacted with:" + colliderSelected.transform.parent);
 
         }
-        if ((InputManager.ActiveDevice?.Action1?.WasPressed ?? false) && !isHoldingItem)
+        if (InputManager.ActiveDevice?.Action1?.WasPressed ?? false)
         {
-            var surface = GetFacedObject()?.GetComponent<PlacementSurface>();
-            if (surface != null)
+            if (isHoldingItem)
             {
-                var item = surface.TryPickUpItem();
-                if (item != null)
-                {
-                    var itemTransform = (item as MonoBehaviour).transform;
-                    itemTransform.parent = holdingAnchor;
-                    itemTransform.GetComponent<Rigidbody>().isKinematic = true;
-                    itemTransform.GetComponent<Collider>().enabled = false;
-                    itemTransform.localPosition = Vector3.zero;
-                    itemTransform.localRotation = Quaternion.identity;
+                DropItem();
+            }
+            else
+            {
+                PickUpItem();
+            }
+        }
+    }
 
-                    leftHand.localPosition = new Vector3(-0.359f, 0, 0.752f);
-                    rightHand.localPosition = new Vector3(0.359f, 0, 0.752f);
-                }
+    private void DropItem()
+    {
+        var heldItem = this.heldItem?.GetComponent<IPickableItem>();
+        if (heldItem == null)
+        {
+            return;
+        }
+        var surface = GetFacedObject()?.GetComponent<PlacementSurface>();
+        if (surface != null && surface.TryPlaceItem(heldItem))
+        {
+            leftHand.localPosition = leftHandOriginalPosition;
+            rightHand.localPosition = rightHandOriginalPosition;
+        }
+    }
+
+    private void PickUpItem()
+    {
+        var surface = GetFacedObject()?.GetComponent<PlacementSurface>();
+        if (surface != null)
+        {
+            var item = surface.TryPickUpItem();
+            if (item != null)
+            {
+                var itemTransform = (item as MonoBehaviour).transform;
+                itemTransform.parent = holdingAnchor;
+                itemTransform.GetComponent<Rigidbody>().isKinematic = true;
+                itemTransform.GetComponent<Collider>().enabled = false;
+                itemTransform.localPosition = Vector3.zero;
+                itemTransform.localRotation = Quaternion.identity;
+
+                leftHand.localPosition = leftHandHoldingPosition;
+                rightHand.localPosition = rightHandHoldingPosition;
             }
         }
     }
