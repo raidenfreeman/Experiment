@@ -14,7 +14,7 @@ public class PlayerInteraction : MonoBehaviour
     [SerializeField]
     private float reachRadius;
 
-    private Vector3 forwardReach
+    private Vector3 forwardReachVector
     {
         get
         {
@@ -22,15 +22,10 @@ public class PlayerInteraction : MonoBehaviour
         }
     }
 
-    void Start()
-    {
-        //heldItem.Value = new NoItem();
-    }
-
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawLine(transform.position, transform.position + forwardReach);
+        Gizmos.DrawLine(transform.position, transform.position + forwardReachVector);
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(transform.position, reachRadius);
         if (collidersDebug != null)
@@ -56,30 +51,14 @@ public class PlayerInteraction : MonoBehaviour
     Collider selectedColliderDebug;
     void Update()
     {
-        //InputManager.OnDeviceAttached
-
         if (InputManager.ActiveDevice?.Action3?.IsPressed ?? false)
         {
             var collider = GetHitCollider();
-            //var interactible = collider.gameObject.GetComponent<Surface>();
-
-
-            //var angles = collidersHit.Select(x => Vector3.Angle(this.forwardReach, x.transform.position - this.transform.position)).ToArray();
-            //Debug.Log("Object Interacted with:" + colliderSelected.transform.parent);
-
         }
 
         if (InputManager.ActiveDevice?.Action1?.IsPressed ?? false)
         {
-            //if (Input.GetKeyDown(KeyCode.F))
-            //{
             var collider = GetHitCollider();
-
-            //var interactible = colliderSelected.gameObject.GetComponent<PickableItem>();
-
-            //var angles = collidersHit.Select(x => Vector3.Angle(this.forwardReach, x.transform.position - this.transform.position)).ToArray();
-            //Debug.Log("Object Interacted with:" + colliderSelected.transform.parent);
-
         }
     }
 
@@ -89,21 +68,13 @@ public class PlayerInteraction : MonoBehaviour
         collidersDebug = collidersHit;
         var colliderSelected = collidersHit.SelectItemBy(
             (a, b) =>
-                Vector3.Angle(this.forwardReach, a.transform.position - this.transform.position) <
-                Vector3.Angle(this.forwardReach, b.transform.position - this.transform.position)
+                Vector3.Angle(this.forwardReachVector, a.transform.position - this.transform.position) <
+                Vector3.Angle(this.forwardReachVector, b.transform.position - this.transform.position)
         );
         selectedColliderDebug = colliderSelected;
         return colliderSelected;
     }
 
-    /*Collider SelectAlignedCollider(Collider[] colliders)
-    {
-        //if (colliders.Length <= 1)
-        //{
-        //    return colliders
-        //}
-        //return
-    }*/
 }
 
 public static class ExtMethods

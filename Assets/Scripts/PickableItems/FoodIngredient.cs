@@ -59,6 +59,10 @@ public class FoodIngredient : MonoBehaviour, IPickableItem, IPreparable
     /// <returns>The percentage of preparation</returns>
     public int Prepare(float timeToAdd)
     {
+        if (timeToAdd > 0)
+        {
+            sb.transform.parent.gameObject.SetActive(true);
+        }
         timeSpentPreparing += timeToAdd;
         if (timeSpentPreparing >= timeToPrepare)
         {

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class PlacementSurface : MonoBehaviour
 {
@@ -30,7 +31,7 @@ public class PlacementSurface : MonoBehaviour
     {
         if (placedItem != null)
         {
-            return false;
+            return TryCombineItems(item,placedItem);
         }
         placedItem = item;
         var itemTransform = (item as MonoBehaviour).transform;
@@ -49,6 +50,11 @@ public class PlacementSurface : MonoBehaviour
         return true;
     }
 
+    private bool TryCombineItems(IPickableItem item, IPickableItem placedItem)
+    {
+        throw new NotImplementedException();
+    }
+
     /// <summary>
     /// Try to get the placed item
     /// </summary>
@@ -65,20 +71,6 @@ public class PlacementSurface : MonoBehaviour
             var itemToReturn = placedItem;
             placedItem = null;
             return itemToReturn;
-            //var itemTransform = (placedItem as MonoBehaviour).transform;
-            //itemTransform.parent = newAnchor;
-            //itemTransform.localPosition = Vector3.zero;
-            //itemTransform.localRotation = Quaternion.identity;
-            //var itemRigidbody = itemTransform.GetComponent<Rigidbody>();
-            //if (itemRigidbody != null)
-            //{
-            //    itemRigidbody.constraints = RigidbodyConstraints.FreezeAll;
-            //}
-            //else
-            //{
-            //    Debug.LogWarning("No rigidbody attached to IPickableItem: " + placedItem.ToString());
-            //}
-            //return placedItem;
         }
     }
 
