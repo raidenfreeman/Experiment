@@ -1,4 +1,5 @@
-﻿/// <summary>
+﻿using UnityEngine;
+/// <summary>
 /// The data container of every item
 /// </summary>
 public interface IPickableItem
@@ -19,4 +20,9 @@ public interface IPickableItem
     /// <param name="surface">The component reference of the target surface</param>
     void Place(PlacementSurface surface);
 
+    Transform LeftHandAnchor { get; }
+
+    Transform RightHandAnchor { get; }
+
+    Transform PlacementAnchor { get; }
 }

@@ -24,9 +24,7 @@ public class PlayerPickup : MonoBehaviour
     private Transform rightHand;
 
     // TODO: Replace with animation on the final model
-    private readonly Vector3 leftHandHoldingPosition = new Vector3(-0.359f, 0, 0.752f);
     private readonly Vector3 leftHandOriginalPosition = new Vector3(-0.6f, 0, 0.3f);
-    private readonly Vector3 rightHandHoldingPosition = new Vector3(0.359f, 0, 0.752f);
     private readonly Vector3 rightHandOriginalPosition = new Vector3(0.6f, 0, 0.3f);
 
     private bool isHoldingItem { get { return holdingAnchor.childCount > 0; } }
@@ -134,9 +132,11 @@ public class PlayerPickup : MonoBehaviour
                 itemTransform.localPosition = Vector3.zero;
                 itemTransform.localRotation = Quaternion.identity;
 
-                leftHand.localPosition = leftHandHoldingPosition;
-                rightHand.localPosition = rightHandHoldingPosition;
+                leftHand.localPosition = transform.InverseTransformPoint(item.LeftHandAnchor.position);
+                rightHand.localPosition = transform.InverseTransformPoint(item.RightHandAnchor.position);
             }
+                //TODO: If it fails, try the next closest surface
+                //getfacedobject should be replaced by a function that orders surfaces by angular proximity in a list
         }
     }
 

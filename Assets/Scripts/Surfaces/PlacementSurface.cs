@@ -31,12 +31,16 @@ public class PlacementSurface : MonoBehaviour
     {
         if (placedItem != null)
         {
-            return TryCombineItems(item,placedItem);
+            return TryCombineItems(item, placedItem);
         }
         placedItem = item;
         var itemTransform = (item as MonoBehaviour).transform;
+        Debug.Log(itemTransform.position);
         itemTransform.parent = placementAnchor;
         itemTransform.localPosition = Vector3.zero;
+        Debug.Log(itemTransform.position);
+        itemTransform.localPosition = -item.PlacementAnchor.localPosition;
+        Debug.Log(itemTransform.position);
         itemTransform.localRotation = Quaternion.identity;
         var itemRigidbody = itemTransform.GetComponent<Rigidbody>();
         if (itemRigidbody != null)
@@ -86,9 +90,11 @@ public class PlacementSurface : MonoBehaviour
             }
             else
             {
-                pickableItemPlacedOnAwake.transform.parent = placementAnchor;
-                pickableItemPlacedOnAwake.transform.localPosition = Vector3.zero;
-                pickableItemPlacedOnAwake.transform.localRotation = Quaternion.identity;
+                var itemTransform = pickableItemPlacedOnAwake.transform;
+                itemTransform.parent = placementAnchor;
+                itemTransform.localPosition = Vector3.zero;
+                itemTransform.localPosition = -item.PlacementAnchor.localPosition;
+                itemTransform.localRotation = Quaternion.identity;
                 placedItem = item;
             }
         }
