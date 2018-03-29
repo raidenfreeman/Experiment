@@ -43,6 +43,9 @@ public class PlacementSurfaceTest
         var surface = new GameObject().AddComponent<PlacementSurface>();
         Assert.IsNull(surface.placedItem);
         var newItem = new GameObject().AddComponent<FoodIngredient>();
+        typeof(FoodIngredient)
+            .GetField("placementAnchor", BindingFlags.NonPublic | BindingFlags.Instance)
+            .SetValue(newItem, new GameObject().transform);
         var didPlaceItem = surface.TryPlaceItem(newItem);
         Assert.IsTrue(didPlaceItem);
         Assert.AreSame(surface.placedItem, newItem);

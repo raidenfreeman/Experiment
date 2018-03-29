@@ -6,6 +6,10 @@ using UnityEngine;
 using Assets.Scripts;
 using InControl;
 
+
+
+// Responsible for handling picking up and droping pickable items.
+// Should not hold any reference to the item (you can get it from the anchor if needed)
 public class PlayerPickup : MonoBehaviour
 {
 
@@ -110,6 +114,7 @@ public class PlayerPickup : MonoBehaviour
             return;
         }
         var surface = GetFacedObject()?.GetComponent<PlacementSurface>();
+        //TODO: Iterate over sorted list of faced surfaces.
         if (surface != null && surface.TryPlaceItem(heldItem))
         {
             leftHand.localPosition = leftHandOriginalPosition;

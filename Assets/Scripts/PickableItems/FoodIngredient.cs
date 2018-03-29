@@ -7,6 +7,8 @@ using UnityEngine;
 
 public class FoodIngredient : MonoBehaviour, IPickableItem, IPreparable
 {
+
+
     /// <summary>
     /// Occurs when the food is prepared
     /// </summary>
@@ -16,6 +18,8 @@ public class FoodIngredient : MonoBehaviour, IPickableItem, IPreparable
     /// The time needed to complete preparing the item
     /// </summary>
     public readonly float timeToPrepare = 5;
+
+    public NonBaseIngredients IngredientType;
 
     /// <summary>
     /// How much % is completed
@@ -130,7 +134,7 @@ public class FoodIngredient : MonoBehaviour, IPickableItem, IPreparable
     {
         if (timeToAdd > 0)
         {
-            sb.transform.parent.gameObject.SetActive(true);
+            sb?.transform.parent.gameObject.SetActive(true);
         }
         timeSpentPreparing += timeToAdd;
         if (timeSpentPreparing >= timeToPrepare)

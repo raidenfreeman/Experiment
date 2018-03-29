@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Linq;
 using UnityEngine;
 
 public class PlacementSurface : MonoBehaviour
@@ -33,15 +33,8 @@ public class PlacementSurface : MonoBehaviour
         {
             return TryCombineItems(item, placedItem);
         }
-        placedItem = item;
         var itemTransform = (item as MonoBehaviour).transform;
-        Debug.Log(itemTransform.position);
-        itemTransform.parent = placementAnchor;
-        itemTransform.localPosition = Vector3.zero;
-        Debug.Log(itemTransform.position);
-        itemTransform.localPosition = -item.PlacementAnchor.localPosition;
-        Debug.Log(itemTransform.position);
-        itemTransform.localRotation = Quaternion.identity;
+        PlaceItemOnSurface(item, itemTransform);
         var itemRigidbody = itemTransform.GetComponent<Rigidbody>();
         if (itemRigidbody != null)
         {
@@ -54,9 +47,51 @@ public class PlacementSurface : MonoBehaviour
         return true;
     }
 
-    private bool TryCombineItems(IPickableItem item, IPickableItem placedItem)
+    private bool TryCombineItems(IPickableItem heldItem, IPickableItem placedItem)
     {
-        throw new NotImplementedException();
+        var item1MonoBehaviour = (heldItem as MonoBehaviour);
+        if (item1MonoBehaviour == null)
+        {
+            return false;
+        }
+        var item2MonoBehaviour = (placedItem as MonoBehaviour);
+        if (item2MonoBehaviour == null)
+        {
+            return false;
+        }
+        // Set the held item as the base
+        var comboBase = item1MonoBehaviour.GetComponent<CombinationBase>();
+        var itemToAdd = item2MonoBehaviour.GetComponent<FoodIngredient>();
+        if (comboBase == null || itemToAdd == null)
+        {
+            // Set the placed item as the base
+            comboBase = item2MonoBehaviour.GetComponent<CombinationBase>();
+            itemToAdd = item1MonoBehaviour.GetComponent<FoodIngredient>();
+            if (comboBase == null || itemToAdd == null)
+            {
+                //if no item is a combo base, they can't be combined
+                return false;
+            }
+        }
+
+        var gg = comboBase.RecipeList.Any(x => x.Contains(itemToAdd.IngredientType));
+        if (gg)
+        {
+            comboBase.AddItem(itemToAdd);
+        }
+        //TODO: this should get the enum from the item
+        //TODO: Check if it's prepared
+        //TODO: actually check recipes, because this is seisse.
+        return gg;
+    }
+
+    void foo(CombinationBase b, IPickableItem i)
+    {
+
+    }
+    void foo(IPickableItem i, CombinationBase b)
+    {
+
     }
 
     /// <summary>
@@ -90,13 +125,17 @@ public class PlacementSurface : MonoBehaviour
             }
             else
             {
-                var itemTransform = pickableItemPlacedOnAwake.transform;
-                itemTransform.parent = placementAnchor;
-                itemTransform.localPosition = Vector3.zero;
-                itemTransform.localPosition = -item.PlacementAnchor.localPosition;
-                itemTransform.localRotation = Quaternion.identity;
-                placedItem = item;
+                PlaceItemOnSurface(item, pickableItemPlacedOnAwake.transform);
             }
         }
+    }
+
+    private void PlaceItemOnSurface(IPickableItem item, Transform itemTransform)
+    {
+        itemTransform.parent = placementAnchor;
+        itemTransform.localPosition = Vector3.zero;
+        itemTransform.localPosition = -item.PlacementAnchor.localPosition;
+        itemTransform.localRotation = Quaternion.identity;
+        placedItem = item;
     }
 }
