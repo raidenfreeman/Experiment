@@ -86,7 +86,7 @@ public class PlayerPickup : MonoBehaviour
             //if (Input.GetKeyDown(KeyCode.F))
             //{
             GetFacedObject()?.GetComponent<IInteractibleSurface>()?.TryInteract();
-            
+
             //var interactible = colliderSelected.gameObject.GetComponent<PickableItem>();
 
             //var angles = collidersHit.Select(x => Vector3.Angle(this.forwardReach, x.transform.position - this.transform.position)).ToArray();
@@ -97,7 +97,7 @@ public class PlayerPickup : MonoBehaviour
         {
             if (isHoldingItem)
             {
-                DropItem();
+                PlaceItem();
             }
             else
             {
@@ -106,7 +106,7 @@ public class PlayerPickup : MonoBehaviour
         }
     }
 
-    private void DropItem()
+    private void PlaceItem()
     {
         var heldItem = this.heldItem?.GetComponent<IPickableItem>();
         if (heldItem == null)
@@ -115,11 +115,27 @@ public class PlayerPickup : MonoBehaviour
         }
         var surface = GetFacedObject()?.GetComponent<PlacementSurface>();
         //TODO: Iterate over sorted list of faced surfaces.
-        if (surface != null && surface.TryPlaceItem(heldItem))
+        if (surface != null)
         {
-            leftHand.localPosition = leftHandOriginalPosition;
-            rightHand.localPosition = rightHandOriginalPosition;
+            if (surface.TryPlaceItem(heldItem))
+            {
+                leftHand.localPosition = leftHandOriginalPosition;
+                rightHand.localPosition = rightHandOriginalPosition;
+            }
         }
+        else // if you didn't target a surface
+        {
+            DropItemOnGround();
+        }
+    }
+
+    private void DropItemOnGround()
+    {
+        var itemRB = heldItem.GetComponent<Rigidbody>();
+        itemRB.constraints = RigidbodyConstraints.None;
+        heldItem.GetComponent<Collider>().enabled = true;
+        itemRB.isKinematic = false;
+        heldItem.parent = null;
     }
 
     private void PickUpItem()
@@ -140,8 +156,8 @@ public class PlayerPickup : MonoBehaviour
                 leftHand.localPosition = transform.InverseTransformPoint(item.LeftHandAnchor.position);
                 rightHand.localPosition = transform.InverseTransformPoint(item.RightHandAnchor.position);
             }
-                //TODO: If it fails, try the next closest surface
-                //getfacedobject should be replaced by a function that orders surfaces by angular proximity in a list
+            //TODO: If it fails, try the next closest surface
+            //getfacedobject should be replaced by a function that orders surfaces by angular proximity in a list
         }
     }
 
