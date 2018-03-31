@@ -5,6 +5,7 @@ using System.Linq;
 using UnityEngine;
 using Assets.Scripts;
 using InControl;
+using UnityEditor;
 
 
 
@@ -17,6 +18,11 @@ public class PlayerPickup : MonoBehaviour
 
     [SerializeField]
     private float reachRadius;
+
+    internal float GetReachRadius { get { return reachRadius; } }
+
+    [SerializeField]
+    internal float reachAngle = 120f;
 
     [SerializeField]
     private Transform holdingAnchor;
@@ -39,14 +45,14 @@ public class PlayerPickup : MonoBehaviour
     {
         get
         {
-            return transform.forward * reachRadius;
+            return transform.position + transform.forward * reachRadius;
         }
     }
 
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawLine(transform.position, transform.position + forwardReach);
+        Gizmos.DrawLine(transform.position, forwardReach);
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(transform.position, reachRadius);
         if (collidersDebug != null)
@@ -68,30 +74,17 @@ public class PlayerPickup : MonoBehaviour
         }
     }
 
-    Collider[] collidersDebug; //for debug
+    IEnumerable<Collider> collidersDebug; //for debug
     Collider selectedColliderDebug;
+
+    public float angleStep = 5;
+
     void Update()
     {
-        //InputManager.OnDeviceAttached
-
-
-        var a1 = InputManager.ActiveDevice;
-        var b1 = a1.Action3;
-        var c1 = b1.IsPressed;
-        //var d
-        //var e
-
         if ((InputManager.ActiveDevice?.Action3?.IsPressed ?? false) && !isHoldingItem)
         {
-            //if (Input.GetKeyDown(KeyCode.F))
-            //{
-            GetFacedObject()?.GetComponent<IInteractibleSurface>()?.TryInteract();
-
-            //var interactible = colliderSelected.gameObject.GetComponent<PickableItem>();
-
-            //var angles = collidersHit.Select(x => Vector3.Angle(this.forwardReach, x.transform.position - this.transform.position)).ToArray();
-            //Debug.Log("Object Interacted with:" + colliderSelected.transform.parent);
-
+            //Try interacting with every in range surface in order, stopping at the first
+            GetSurfacesInRangeGroupedByAngle().Any(x => x.Any(y => y.GetComponent<IInteractibleSurface>()?.TryInteract() ?? false));
         }
         if (InputManager.ActiveDevice?.Action1?.WasPressed ?? false)
         {
@@ -113,20 +106,16 @@ public class PlayerPickup : MonoBehaviour
         {
             return;
         }
-        var surface = GetFacedObject()?.GetComponent<PlacementSurface>();
-        //TODO: Iterate over sorted list of faced surfaces.
-        if (surface != null)
+        var surfaceGroups = GetSurfacesInRangeGroupedByAngle().ToArray();
+        if (!surfaceGroups.Any(x =>
         {
-            if (surface.TryPlaceItem(heldItem))
-            {
-                leftHand.localPosition = leftHandOriginalPosition;
-                rightHand.localPosition = rightHandOriginalPosition;
-            }
-        }
-        else // if you didn't target a surface
+            var h = x.ToArray();
+            return h.Any(y => y.TryPlaceItem(heldItem));
+        }))
         {
             DropItemOnGround();
         }
+        ReturnHandsToOriginalPosition();
     }
 
     private void DropItemOnGround()
@@ -138,52 +127,125 @@ public class PlayerPickup : MonoBehaviour
         heldItem.parent = null;
     }
 
+
     private void PickUpItem()
     {
-        var surface = GetFacedObject()?.GetComponent<PlacementSurface>();
-        if (surface != null)
+        IPickableItem item = null;
+        // Pickup an item from the surfaces
+        GetPickableCollidersInRange().Any(group => group.Any(collider =>
         {
-            var item = surface.TryPickUpItem();
-            if (item != null)
+            var surface = collider.GetComponent<PlacementSurface>();
+            if (surface != null)
             {
-                var itemTransform = (item as MonoBehaviour).transform;
-                itemTransform.parent = holdingAnchor;
-                itemTransform.GetComponent<Rigidbody>().isKinematic = true;
-                itemTransform.GetComponent<Collider>().enabled = false;
-                itemTransform.localPosition = Vector3.zero;
-                itemTransform.localRotation = Quaternion.identity;
-
-                leftHand.localPosition = transform.InverseTransformPoint(item.LeftHandAnchor.position);
-                rightHand.localPosition = transform.InverseTransformPoint(item.RightHandAnchor.position);
+                item = surface.TryPickUpItem();
+                return item != null;
             }
-            //TODO: If it fails, try the next closest surface
-            //getfacedobject should be replaced by a function that orders surfaces by angular proximity in a list
+            else
+            {
+                item = collider.GetComponent<IPickableItem>();
+                // We assume, that we cannot hit a collider on top of a surface,
+                // because IPickableItem colliders on placement surfaces are disabled
+                return item != null;
+            }
+        }));
+        if (item != null)
+        {
+            var itemTransform = (item as MonoBehaviour).transform;
+            itemTransform.parent = holdingAnchor;
+            itemTransform.GetComponent<Rigidbody>().isKinematic = true;
+            itemTransform.GetComponent<Collider>().enabled = false;
+            itemTransform.localPosition = Vector3.zero;
+            itemTransform.localRotation = Quaternion.identity;
+
+            leftHand.position = item.LeftHandAnchor.position;
+            rightHand.position = item.RightHandAnchor.position;
         }
     }
 
-    /// <summary>
-    /// Gets the game object, in range of the player, prefering the one he faces
-    /// </summary>
-    /// <returns>A game object with a collider in the Interactibles layer</returns>
-    private GameObject GetFacedObject()
+    private void ReturnHandsToOriginalPosition()
     {
-        var collidersHit = Physics.OverlapSphere(transform.position, reachRadius, 1 << 8);
-        collidersDebug = collidersHit;
-        var colliderSelected = collidersHit.SelectItemBy(
-            (a, b) =>
-                Vector3.Angle(this.forwardReach, a.transform.position - this.transform.position) <
-                Vector3.Angle(this.forwardReach, b.transform.position - this.transform.position)
-        );
-        selectedColliderDebug = colliderSelected;
-        return colliderSelected?.gameObject;
+        leftHand.localPosition = leftHandOriginalPosition;
+        rightHand.localPosition = rightHandOriginalPosition;
     }
 
-    /*Collider SelectAlignedCollider(Collider[] colliders)
+    /// <summary>
+    /// Get the surfaces hit, grouped by angle, ordered, with the one closes to the front first.
+    /// </summary>
+    /// <returns>An array of PlacementSurface</returns>
+    private IEnumerable<IOrderedEnumerable<PlacementSurface>> GetSurfacesInRangeGroupedByAngle()
     {
-        //if (colliders.Length <= 1)
-        //{
-        //    return colliders
-        //}
-        //return
-    }*/
+        var _transform = this.transform;
+        //filter hit colliders, so that those on the back (from 210deg to 330deg)
+        var collidersHit = Physics.OverlapSphere(transform.position, reachRadius, 1 << 8)
+            .Where(x =>
+            {
+                var angle = Vector3.Angle(this.forwardReach, x.transform.position - _transform.position);
+                return angle < reachAngle;
+            });
+
+#if UNITY_EDITOR
+
+        collidersDebug = collidersHit;
+
+#endif
+        return collidersHit
+            // group them relative to the angle from the forward vector, in steps of +/-5deg
+            .GroupBy(x =>
+                (int)(Vector3.Angle(this.forwardReach - _transform.position, x.transform.position - _transform.position) / angleStep))
+            //Order the groups based on how far they are from 0 deg
+            .OrderBy(x => x.Key)
+            // filter out those who are not placement surfaces
+            .Select(x => x.Select(y => y.GetComponent<PlacementSurface>()).Where(y => y != null))
+            // inside the groups, order them by proximity to the player
+            .Select(x => x.OrderBy(y => (_transform.position - y.transform.position).sqrMagnitude));
+    }
+
+    private IEnumerable<IOrderedEnumerable<Collider>> GetPickableCollidersInRange()
+    {
+        // IMPORTANT: WE ASSUME THAT OBJECTS PLACED ON SURFACES, HAVE THEIR COLLIDERS DISABLED
+        var _transform = this.transform;
+        //filter hit colliders, so that those on the back (from 210deg to 330deg)
+        var collidersHit = Physics.OverlapSphere(transform.position, reachRadius, 1 << 8 | 1 << 9)
+            .Where(x =>
+            {
+                var angle = Vector3.Angle(this.forwardReach, x.transform.position - _transform.position);
+                return angle < reachAngle;
+            });
+
+#if UNITY_EDITOR
+
+        collidersDebug = collidersHit;
+
+#endif
+        return collidersHit
+            // group them relative to the angle from the forward vector, in steps of +/-5deg
+            .GroupBy(x =>
+                (int)(Vector3.Angle(this.forwardReach - _transform.position, x.transform.position - _transform.position) / angleStep))
+            //Order the groups based on how far they are from 0 deg
+            .OrderBy(x => x.Key)
+            // inside the groups, order them by proximity to the player
+            .Select(x => x.OrderBy(y => (_transform.position - y.transform.position).sqrMagnitude));
+    }
+}
+
+// Create a 180 degrees wire arc with a ScaleValueHandle attached to the disc
+// that lets you modify the "shieldArea" var in the WireArcExample.js
+[CustomEditor(typeof(PlayerPickup))]
+public class DrawSolidArc : Editor
+{
+    void OnSceneGUI()
+    {
+        Handles.color = new Color(1, 1, 1, 0.3f);
+        PlayerPickup player = (PlayerPickup)target;
+        Handles.DrawSolidArc(player.transform.position + Vector3.up * 0.3f, player.transform.up, player.transform.forward, player.reachAngle, player.GetReachRadius);
+        Handles.DrawSolidArc(player.transform.position + Vector3.up * 0.3f, player.transform.up, player.transform.forward, -player.reachAngle, player.GetReachRadius);
+
+        Handles.color = new Color(250, 0, 0, 0.5f);
+        for (float i = player.angleStep; i < player.reachAngle; i += player.angleStep)
+        {
+            Handles.DrawSolidArc(player.transform.position + Vector3.up * 0.3f, player.transform.up, player.transform.forward, i, player.GetReachRadius);
+            Handles.DrawSolidArc(player.transform.position + Vector3.up * 0.3f, player.transform.up, player.transform.forward, -i, player.GetReachRadius);
+            Handles.color = new Color(0, 0, 250, 0.1f);
+        }
+    }
 }

@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 224876122429777506}
   - component: {fileID: 222318893108919316}
   - component: {fileID: 114760982248012734}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Simple Bar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41,13 +41,13 @@ GameObject:
   - component: {fileID: 114712190539463190}
   - component: {fileID: 54023105191606346}
   - component: {fileID: 135889349813382902}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: MyTomato
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1170383860658018
 GameObject:
   m_ObjectHideFlags: 0
@@ -56,7 +56,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4880798437889576}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: RightHandAnchor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -75,7 +75,7 @@ GameObject:
   - component: {fileID: 114210328564252602}
   - component: {fileID: 114977938638751886}
   - component: {fileID: 114385828024885754}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -90,7 +90,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4193248600575020}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: PlacementAnchor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -108,7 +108,7 @@ GameObject:
   - component: {fileID: 222955155735821990}
   - component: {fileID: 114363373722175888}
   - component: {fileID: 114123466793756404}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Status Fill 01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -123,7 +123,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4938229116048668}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: LeftHandAnchor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -359,6 +359,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddf6c0820c5111247882d293d0ac54bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IngredientType: 0
   rightHandAnchor: {fileID: 4880798437889576}
   leftHandAnchor: {fileID: 4938229116048668}
   placementAnchor: {fileID: 4193248600575020}

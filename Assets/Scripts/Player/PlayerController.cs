@@ -24,6 +24,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private float GroundCheckDistance;
 
+    [SerializeField]
+    private Transform model;
+
     private bool IsGrounded;
 
     private Vector3 GroundNormal;
@@ -62,18 +65,39 @@ public class PlayerController : MonoBehaviour
 
     void Move(float h, float v)
     {
+
+        //Debug.Log($"{h}  {v}");
         // Set the movement vector based on the axis input.
-        movement.Set(h, 0f, v);
+        //movement.Set(h, 0f, v);
 
         // Normalise the movement vector and make it proportional to the speed per second.
-        movement = movement.normalized * speed * Time.deltaTime;
+        //movement = movement.normalized * speed * Time.fixedDeltaTime;
 
         // Move the player to it's current position plus the movement.
-        rigidbody.MovePosition(transform.position + movement);
-        if (movement != Vector3.zero)
+        //rigidbody.MovePosition(transform.position + movement);
+
+        var mv = new Vector3(h, 0, v).normalized;
+        rigidbody.velocity = mv * speed;// movement;
+
+
+        /*float dt = Time.fixedDeltaTime;
+        Vector3 force = rigidbody.mass * (movement- rigidbody.velocity * dt) / (dt);
+        rigidbody.AddForce(force);*/
+
+        if (mv != Vector3.zero)
         {
-            rigidbody.MoveRotation(Quaternion.LookRotation(movement, Vector3.up));
+            model.rotation = Quaternion.LookRotation(mv, Vector3.up);
         }
+
+        //if (mv != Vector3.zero)
+        //{
+        //    rigidbody.rotation = Quaternion.LookRotation(mv, Vector3.up);
+        //    // rigidbody.MoveRotation(Quaternion.LookRotation(mv, Vector3.up));
+        //}
+        //else
+        //{
+        //    rigidbody.angularVelocity = Vector3.zero;
+        //}
     }
 
     void Turning()

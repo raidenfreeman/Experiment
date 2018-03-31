@@ -19,7 +19,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4741478836295930}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: LeftHandAnchor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36,7 +36,7 @@ GameObject:
   - component: {fileID: 4308574076591406}
   - component: {fileID: 33095945170478058}
   - component: {fileID: 23216795465692018}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: PlateModel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -54,7 +54,7 @@ GameObject:
   - component: {fileID: 65155366419710270}
   - component: {fileID: 54932248624861764}
   - component: {fileID: 114637924119851680}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Plate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -69,7 +69,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4836613780881514}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: RightHandAnchor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -84,7 +84,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4066294572598402}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: PlacementAnchor
   m_TagString: Untagged
   m_Icon: {fileID: 0}

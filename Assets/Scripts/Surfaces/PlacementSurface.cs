@@ -35,15 +35,6 @@ public class PlacementSurface : MonoBehaviour
         }
         var itemTransform = (item as MonoBehaviour).transform;
         PlaceItemOnSurface(item, itemTransform);
-        var itemRigidbody = itemTransform.GetComponent<Rigidbody>();
-        if (itemRigidbody != null)
-        {
-            itemRigidbody.constraints = RigidbodyConstraints.FreezeAll;
-        }
-        else
-        {
-            Debug.LogWarning("No rigidbody attached to IPickableItem: " + placedItem.ToString());
-        }
         return true;
     }
 
@@ -136,6 +127,23 @@ public class PlacementSurface : MonoBehaviour
         itemTransform.localPosition = Vector3.zero;
         itemTransform.localPosition = -item.PlacementAnchor.localPosition;
         itemTransform.localRotation = Quaternion.identity;
+        var collider = itemTransform.GetComponent<Collider>();
+        if (collider != null)
+        {
+            collider.enabled = false;
+        }
+        var itemRigidbody = itemTransform.GetComponent<Rigidbody>();
+        if (itemRigidbody != null)
+        {
+            itemRigidbody.constraints = RigidbodyConstraints.FreezeAll;
+            itemTransform.GetComponent<Collider>().enabled = false;
+        }
+        else
+        {
+            // In case that a test fails, and leads you here:
+            // TODO: Implement empty object pattern for default placed item, instead of relying on null
+            Debug.LogWarning("No rigidbody attached to IPickableItem: " + placedItem.ToString());
+        }
         placedItem = item;
     }
 }
