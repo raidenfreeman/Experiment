@@ -45,14 +45,15 @@ public class PlayerPickup : MonoBehaviour
     {
         get
         {
-            return transform.position + transform.forward * reachRadius;
+            return transform.forward * reachRadius;
         }
     }
 
+#if UNITY_EDITOR
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawLine(transform.position, forwardReach);
+        Gizmos.DrawLine(transform.position, forwardReach + transform.position);
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(transform.position, reachRadius);
         if (collidersDebug != null)
@@ -73,6 +74,7 @@ public class PlayerPickup : MonoBehaviour
             }
         }
     }
+#endif
 
     IEnumerable<Collider> collidersDebug; //for debug
     Collider selectedColliderDebug;
@@ -106,11 +108,10 @@ public class PlayerPickup : MonoBehaviour
         {
             return;
         }
-        var surfaceGroups = GetSurfacesInRangeGroupedByAngle().ToArray();
+        var surfaceGroups = GetSurfacesInRangeGroupedByAngle();
         if (!surfaceGroups.Any(x =>
         {
-            var h = x.ToArray();
-            return h.Any(y => y.TryPlaceItem(heldItem));
+            return x.Any(y => y.TryPlaceItem(heldItem));
         }))
         {
             DropItemOnGround();
@@ -191,7 +192,7 @@ public class PlayerPickup : MonoBehaviour
         return collidersHit
             // group them relative to the angle from the forward vector, in steps of +/-5deg
             .GroupBy(x =>
-                (int)(Vector3.Angle(this.forwardReach - _transform.position, x.transform.position - _transform.position) / angleStep))
+                (int)(Vector3.Angle(this.forwardReach, x.transform.position - _transform.position) / angleStep))
             //Order the groups based on how far they are from 0 deg
             .OrderBy(x => x.Key)
             // filter out those who are not placement surfaces
@@ -220,7 +221,7 @@ public class PlayerPickup : MonoBehaviour
         return collidersHit
             // group them relative to the angle from the forward vector, in steps of +/-5deg
             .GroupBy(x =>
-                (int)(Vector3.Angle(this.forwardReach - _transform.position, x.transform.position - _transform.position) / angleStep))
+                (int)(Vector3.Angle(this.forwardReach, x.transform.position - _transform.position) / angleStep))
             //Order the groups based on how far they are from 0 deg
             .OrderBy(x => x.Key)
             // inside the groups, order them by proximity to the player
