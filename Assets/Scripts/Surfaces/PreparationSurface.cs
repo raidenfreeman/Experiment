@@ -17,10 +17,4 @@ public class PreparationSurface : PlacementSurface, IInteractibleSurface
         }
         return false;
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 }

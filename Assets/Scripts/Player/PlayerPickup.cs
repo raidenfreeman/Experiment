@@ -61,23 +61,13 @@ public class PlayerPickup : MonoBehaviour
             Gizmos.color = Color.blue;
             foreach (var col in collidersDebug)
             {
-                if (col != selectedColliderDebug)
-                {
-                    Gizmos.DrawLine(transform.position, col.transform.position);
-                }
-                else
-                {
-                    Gizmos.color = Color.cyan;
-                    Gizmos.DrawLine(transform.position, col.transform.position);
-                    Gizmos.color = Color.blue;
-                }
+                Gizmos.DrawLine(transform.position, col.transform.position);
             }
         }
     }
 #endif
 
     IEnumerable<Collider> collidersDebug; //for debug
-    Collider selectedColliderDebug;
 
     public float angleStep = 5;
 
@@ -180,7 +170,7 @@ public class PlayerPickup : MonoBehaviour
         var collidersHit = Physics.OverlapSphere(transform.position, reachRadius, 1 << 8)
             .Where(x =>
             {
-                var angle = Vector3.Angle(this.forwardReach, x.transform.position - _transform.position);
+                var angle = Vector3.Angle(this.forwardReach, Vector3.ProjectOnPlane(x.transform.position - _transform.position, _transform.up));
                 return angle < reachAngle;
             });
 
@@ -192,7 +182,7 @@ public class PlayerPickup : MonoBehaviour
         return collidersHit
             // group them relative to the angle from the forward vector, in steps of +/-5deg
             .GroupBy(x =>
-                (int)(Vector3.Angle(this.forwardReach, x.transform.position - _transform.position) / angleStep))
+                (int)(Vector3.Angle(this.forwardReach, Vector3.ProjectOnPlane(x.transform.position - _transform.position, _transform.up)) / angleStep))
             //Order the groups based on how far they are from 0 deg
             .OrderBy(x => x.Key)
             // filter out those who are not placement surfaces

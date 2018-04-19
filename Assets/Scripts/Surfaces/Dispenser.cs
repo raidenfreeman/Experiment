@@ -23,6 +23,14 @@ public class Dispenser : PlacementSurface
 
     private Stack<IPickableItem> itemPool = new Stack<IPickableItem>();
 
+    private IEnumerable<IPickableItem> inactiveGameObjectPool
+    {
+        get
+        {
+            return itemPool.Where(x => (x as MonoBehaviour).gameObject.activeInHierarchy == false).AsEnumerable();
+        }
+    }
+
     public override IPickableItem TryPickUpItem()
     {
         if (base.placedItem == null)
@@ -42,13 +50,13 @@ public class Dispenser : PlacementSurface
     private IPickableItem DispenseItem()
     {
         // if the pool is empty
-        if (itemPool.Count <= 0)
+        if (inactiveGameObjectPool.Count() <= 0)
         {
             // fill it
             PopulatePool();
         }
-        // Give the top item of the stack
-        var item = itemPool.Pop();
+        // Get the first deactivated item
+        var item = inactiveGameObjectPool.First();
         (item as MonoBehaviour).gameObject.SetActive(true);
         return item;
     }

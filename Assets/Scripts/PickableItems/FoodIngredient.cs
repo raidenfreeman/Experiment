@@ -7,19 +7,18 @@ using UnityEngine;
 
 public class FoodIngredient : MonoBehaviour, IPickableItem, IPreparable
 {
-
-
-    /// <summary>
-    /// Occurs when the food is prepared
-    /// </summary>
-    public event EventHandler PreparedFood;
-
     /// <summary>
     /// The time needed to complete preparing the item
     /// </summary>
-    public readonly float timeToPrepare = 5;
+    public readonly float timeToPrepare = 1;
 
-    public NonBaseIngredients IngredientType;
+    public bool isPrepared
+    {
+        get
+        {
+            return completionPercentage >= 100;
+        }
+    }
 
     /// <summary>
     /// How much % is completed
@@ -28,7 +27,7 @@ public class FoodIngredient : MonoBehaviour, IPickableItem, IPreparable
     {
         get
         {
-            return (int)(timeSpentPreparing / timeToPrepare * 100f);
+            return (int)(TimeSpentPreparing / timeToPrepare * 100f);
         }
     }
 
@@ -41,7 +40,8 @@ public class FoodIngredient : MonoBehaviour, IPickableItem, IPreparable
     [SerializeField]
     private Transform rightHandAnchor;
 
-
+    [SerializeField]
+    public readonly ContentType ingredientType;
 
     /// <summary>
     /// Set in editor, the point where to place the left hand
@@ -101,10 +101,35 @@ public class FoodIngredient : MonoBehaviour, IPickableItem, IPreparable
         }
     }
 
+    private float timeSpentPreparing;
+
     /// <summary>
     /// The amount of time invested in preparing this item
     /// </summary>
-    private float timeSpentPreparing = 0;
+    private float TimeSpentPreparing
+    {
+        get
+        {
+            return timeSpentPreparing;
+        }
+        set
+        {
+            if (value > timeToPrepare)
+            {
+                value = timeToPrepare;
+            }
+            timeSpentPreparing = value;
+            ProgressBar?.UpdatePercentage(completionPercentage);
+            //if (completionPercentage > 0 && completionPercentage < 100)
+            //{
+            //    ProgressBar?.transform.parent.gameObject.SetActive(true);
+            //}
+            //else
+            //{
+            //    ProgressBar?.transform.parent.gameObject.SetActive(false);
+            //}
+        }
+    }
 
     public void Drop()
     {
@@ -125,6 +150,13 @@ public class FoodIngredient : MonoBehaviour, IPickableItem, IPreparable
         throw new NotImplementedException();
     }
 
+    public void Deactivate()
+    {
+        this.TimeSpentPreparing = 0;
+        this.transform.parent = null;
+        this.gameObject.SetActive(false);
+    }
+
     /// <summary>
     /// Increments preparation by time
     /// </summary>
@@ -132,26 +164,11 @@ public class FoodIngredient : MonoBehaviour, IPickableItem, IPreparable
     /// <returns>The percentage of preparation</returns>
     public int Prepare(float timeToAdd)
     {
-        if (timeToAdd > 0)
-        {
-            sb?.transform.parent.gameObject.SetActive(true);
-        }
-        timeSpentPreparing += timeToAdd;
-        if (timeSpentPreparing >= timeToPrepare)
-        {
-            timeSpentPreparing = timeToPrepare;
-            PreparationComplete();
-        }
-        sb?.UpdateBar(completionPercentage, 100);
+        TimeSpentPreparing += timeToAdd;
         return completionPercentage;
     }
-    public SimpleHealthBar sb;
 
-    /// <summary>
-    /// Called when the item is prepared
-    /// </summary>
-    void PreparationComplete()
-    {
-        PreparedFood?.Invoke(this, new EventArgs());
-    }
+    [SerializeField]
+    ProgressBar ProgressBar;
+    //public SimpleHealthBar sb;
 }

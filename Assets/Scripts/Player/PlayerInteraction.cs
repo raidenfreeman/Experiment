@@ -53,12 +53,12 @@ public class PlayerInteraction : MonoBehaviour
     {
         if (InputManager.ActiveDevice?.Action3?.IsPressed ?? false)
         {
-            var collider = GetHitCollider();
+            GetHitCollider();
         }
 
         if (InputManager.ActiveDevice?.Action1?.IsPressed ?? false)
         {
-            var collider = GetHitCollider();
+            GetHitCollider();
         }
     }
 
