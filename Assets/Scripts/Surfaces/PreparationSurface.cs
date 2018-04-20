@@ -8,11 +8,11 @@ public class PreparationSurface : PlacementSurface, IInteractibleSurface
 {
     public bool TryInteract()
     {
+        var preparableItem = placedItem as IPreparable;
         // If the surface has an item, and we can interact with it
-        if (placedItem != null && placedItem is IPreparable)
+        if (preparableItem !=null)
         {
-            var interactibleItem = placedItem as IPreparable;
-            interactibleItem.Prepare(Time.deltaTime);
+            preparableItem.Prepare(Time.deltaTime);
             return true;
         }
         return false;

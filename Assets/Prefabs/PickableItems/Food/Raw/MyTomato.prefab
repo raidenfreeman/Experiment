@@ -178,7 +178,7 @@ Transform:
   m_GameObject: {fileID: 1001142108390910}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0.96, z: 0}
-  m_LocalScale: {x: 0.35, y: 0.43, z: 0.35}
+  m_LocalScale: {x: -0.23, y: 0.38, z: 0.2}
   m_Children:
   - {fileID: 4395871587118076}
   m_Father: {fileID: 4462916605401672}
@@ -208,7 +208,7 @@ Transform:
   m_GameObject: {fileID: 1631220620105766}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.85, y: 0.9, z: 0.85}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4395871587118076}
   m_RootOrder: 0
@@ -220,7 +220,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1159479454425920}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.421, y: 1.316, z: -1.574}
+  m_LocalPosition: {x: -0.76207846, y: 1.219, z: -2.5830407}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4193248600575020}
@@ -432,6 +432,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 382ddfde31d986c448e9092c3a93e9a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startingColor: {r: 0.97794116, g: 0.228, b: 0.14381489, a: 1}
+  endingColor: {r: 0.27205884, g: 1, b: 0.6686612, a: 1}
   glassCapsule: {fileID: 4395871587118076}
   fillRenderer: {fileID: 23926465026444168}
   Floor: {fileID: 4737984272133586}

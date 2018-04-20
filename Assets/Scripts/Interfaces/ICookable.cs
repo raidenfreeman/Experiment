@@ -1,5 +1,5 @@
-﻿internal interface ICookable
+﻿public interface ICookable
 {
-
+    int Cook(float timeToAdd);
 }
 

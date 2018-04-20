@@ -6,6 +6,11 @@ using DG.Tweening;
 public class ProgressBar : MonoBehaviour
 {
     [SerializeField]
+    Color startingColor;
+    [SerializeField]
+    Color endingColor;
+
+    [SerializeField]
     Transform glassCapsule;
 
     [SerializeField]
@@ -60,6 +65,9 @@ public class ProgressBar : MonoBehaviour
                 glassCapsule.localScale = initialScale;
             });
         }
+        Color c = Color.Lerp(startingColor, endingColor, percentage * 0.01f);
+        fillRenderer.material.SetColor("_Color", c);
+        fillRenderer.material.SetColor("_CrossColor", c);
         _percentage = percentage;
     }
 
@@ -86,14 +94,4 @@ public class ProgressBar : MonoBehaviour
         tweenStarted = false;
         UpdatePercentage(0f);
     }
-
-    //float p = 0;
-    //private void FixedUpdate()
-    //{
-    //    if (Input.GetKey(KeyCode.L))
-    //    {
-    //        p += Time.fixedDeltaTime * 40;
-    //        UpdatePercentage(p);
-    //    }
-    //}
 }
