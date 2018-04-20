@@ -6,6 +6,9 @@ using DG.Tweening;
 public class ProgressBar : MonoBehaviour
 {
     [SerializeField]
+    Transform glassCapsule;
+
+    [SerializeField]
     Renderer fillRenderer;
 
     /// <summary>
@@ -31,7 +34,7 @@ public class ProgressBar : MonoBehaviour
     {
         if (percentage > 0)
         {
-            _render.enabled = true;
+            glassCapsuleRenderer.enabled = true;
             fillRenderer.enabled = true;
         }
         if (percentage > 100f)
@@ -48,14 +51,13 @@ public class ProgressBar : MonoBehaviour
         if (percentage >= 100f && tweenStarted == false)
         {
             tweenStarted = true;
-            transform.DORotate(Vector3.forward * 720, 1, RotateMode.FastBeyond360).SetEase(Ease.Linear);
-            var initialScale = transform.localScale;
-            transform.DOScale(Vector3.zero, 0.5f).SetDelay(0.5f).SetEase(Ease.InQuint).OnComplete(() =>
+            glassCapsule.DORotate(Vector3.forward * 720, 1, RotateMode.FastBeyond360).SetEase(Ease.Linear);
+            var initialScale = glassCapsule.localScale;
+            glassCapsule.DOScale(Vector3.zero, 0.5f).SetDelay(0.5f).SetEase(Ease.InQuint).OnComplete(() =>
             {
-                _render.enabled = false;
+                glassCapsuleRenderer.enabled = false;
                 fillRenderer.enabled = false;
-                transform.localScale = initialScale;
-                //this.gameObject.SetActive(false);
+                glassCapsule.localScale = initialScale;
             });
         }
         _percentage = percentage;
@@ -65,27 +67,33 @@ public class ProgressBar : MonoBehaviour
     {
         var GlobalPositionDifference = Roof.position - Floor.position;
         fillRenderer.material.SetVector("_PlanePosition", Floor.position + GlobalPositionDifference * _percentage * 0.01f);
+        fillRenderer.material.SetVector("_PlaneNormal", glassCapsule.up);
+    }
+
+    [SerializeField]
+    Renderer glassCapsuleRenderer;
+    private void Awake()
+    {
+        if (glassCapsuleRenderer == null)
+        {
+            glassCapsuleRenderer = glassCapsule.GetComponent<MeshRenderer>();
+        }
     }
 
     bool tweenStarted = false;
-    Renderer _render;
-    private void Awake()
-    {
-        _render = this.GetComponent<MeshRenderer>();
-    }
     private void OnEnable()
     {
         tweenStarted = false;
         UpdatePercentage(0f);
     }
 
-    float p = 0;
-    private void FixedUpdate()
-    {
-        if (Input.GetKey(KeyCode.L))
-        {
-            p += Time.fixedDeltaTime * 40;
-            UpdatePercentage(p);
-        }
-    }
+    //float p = 0;
+    //private void FixedUpdate()
+    //{
+    //    if (Input.GetKey(KeyCode.L))
+    //    {
+    //        p += Time.fixedDeltaTime * 40;
+    //        UpdatePercentage(p);
+    //    }
+    //}
 }

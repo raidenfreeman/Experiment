@@ -164,12 +164,14 @@ public class Pot : MonoBehaviour, IPickableItem, ICombinator
     };
 
     [SerializeField]
-    RectTransform ContentDisplayPanel;
+    GameObject Canvas;
+    [SerializeField]
+    Transform ContentDisplayPanel;
     void UpdateContentsDisplay()
     {
         if (ContentDisplayPanel != null)
         {
-            foreach (Transform child in ContentDisplayPanel.transform)
+            foreach (Transform child in ContentDisplayPanel)
             {
                 Destroy(child.gameObject);
             }
@@ -181,7 +183,7 @@ public class Pot : MonoBehaviour, IPickableItem, ICombinator
                     Instantiate(image, ContentDisplayPanel);
                 }
             }
-            ContentDisplayPanel.gameObject.SetActive(Contents.Count > 0);
+            Canvas.SetActive(Contents.Count > 0);
         }
     }
 
