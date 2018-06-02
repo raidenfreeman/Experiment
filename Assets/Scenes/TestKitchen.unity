@@ -2653,7 +2653,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh23592
+  m_Name: pb_Mesh23600
   serializedVersion: 8
   m_SubMeshes:
   - serializedVersion: 2
