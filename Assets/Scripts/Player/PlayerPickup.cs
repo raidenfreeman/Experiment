@@ -219,6 +219,8 @@ public class PlayerPickup : MonoBehaviour
     }
 }
 
+
+#if UNITY_EDITOR
 // Create a 180 degrees wire arc with a ScaleValueHandle attached to the disc
 // that lets you modify the "shieldArea" var in the WireArcExample.js
 [CustomEditor(typeof(PlayerPickup))]
@@ -240,3 +242,4 @@ public class DrawSolidArc : Editor
         }
     }
 }
+#endif
