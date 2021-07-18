@@ -1,9 +1,0 @@
-<changelist name="Default_Changelist1" date="1597786187278" recycled="false">
-  <option name="PATH" value="$PROJECT_DIR$/.idea/.idea.Experiment/.idea/shelf/Default_Changelist1/shelved.patch" />
-  <option name="DESCRIPTION" value="Default Changelist" />
-  <binary>
-    <option name="BEFORE_PATH" />
-    <option name="AFTER_PATH" value="Assets/Assembly-CSharp.dll" />
-    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/.idea.Experiment/.idea/shelf/Default_Changelist1/Assembly-CSharp.dll" />
-  </binary>
-</changelist>
