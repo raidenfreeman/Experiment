@@ -26,16 +26,7 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fa80aa0b-be0b-48f7-ab57-a1c1fd0c5a75" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/TestKitchen.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/TestKitchen.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logs/Packages-Update.log" beforeDir="false" afterPath="$PROJECT_DIR$/Logs/Packages-Update.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Packages/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Packages/packages-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/packages-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/Packages/com.unity.probuilder/Settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/Packages/com.unity.probuilder/Settings.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectVersion.txt" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectVersion.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/VFXManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/VFXManager.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/VersionControlSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/VersionControlSettings.asset" afterDir="false" />
-    </list>
+    <list default="true" id="fa80aa0b-be0b-48f7-ab57-a1c1fd0c5a75" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -57,6 +48,7 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B0B14AA5-C62E-4673-B670-BB9AFFBA2E20/9e/94ca32e6/ClientChefSynchroniser.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scenes/TestKitchen.unity" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B0B14AA5-C62E-4673-B670-BB9AFFBA2E20/8b/5b04d780/IPlayerControlsImpl.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://D:/Repos/Experiment/Assets/Scenes/TestKitchen.unity" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B0B14AA5-C62E-4673-B670-BB9AFFBA2E20/4b/fcc04f2b/PlayerControls.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/F8918D0C-C5FC-41A1-BABA-01B207A4C016/b6/e7c88f98/Rigidbody.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B0B14AA5-C62E-4673-B670-BB9AFFBA2E20/9b/21b43b8f/RigidbodyMotion.cs" root0="SKIP_HIGHLIGHTING" />
@@ -131,7 +123,16 @@
       <workItem from="1602093038027" duration="30000" />
       <workItem from="1602093447684" duration="266000" />
       <workItem from="1626371534454" duration="596000" />
+      <workItem from="1626620502170" duration="769000" />
     </task>
+    <task id="LOCAL-00001" summary="Upgrade Unity to 2020">
+      <created>1626620664064</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1626620664064</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -170,95 +171,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-  </component>
-  <component name="WindowStateProjectService">
-    <state x="1010" y="502" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1597786152813">
-      <screen x="0" y="0" width="2560" height="1400" />
-    </state>
-    <state x="1010" y="502" key="#com.intellij.fileTypes.FileTypeChooser/0.0.2560.1400/2560.0.1920.1040@0.0.2560.1400" timestamp="1597786152813" />
-    <state width="1877" height="150" key="GridCell.Tab.0.bottom" timestamp="1596560205827">
-      <screen x="2560" y="0" width="1920" height="1040" />
-    </state>
-    <state width="2517" height="519" key="GridCell.Tab.0.bottom/0.0.2560.1400/2560.0.1920.1040@0.0.2560.1400" timestamp="1596558127620" />
-    <state width="1877" height="150" key="GridCell.Tab.0.bottom/0.0.2560.1400/2560.0.1920.1040@2560.0.1920.1040" timestamp="1596560205827" />
-    <state width="1877" height="150" key="GridCell.Tab.0.center" timestamp="1596560205827">
-      <screen x="2560" y="0" width="1920" height="1040" />
-    </state>
-    <state width="2517" height="519" key="GridCell.Tab.0.center/0.0.2560.1400/2560.0.1920.1040@0.0.2560.1400" timestamp="1596558127620" />
-    <state width="1877" height="150" key="GridCell.Tab.0.center/0.0.2560.1400/2560.0.1920.1040@2560.0.1920.1040" timestamp="1596560205827" />
-    <state width="1877" height="150" key="GridCell.Tab.0.left" timestamp="1596560205827">
-      <screen x="2560" y="0" width="1920" height="1040" />
-    </state>
-    <state width="2517" height="519" key="GridCell.Tab.0.left/0.0.2560.1400/2560.0.1920.1040@0.0.2560.1400" timestamp="1596558127620" />
-    <state width="1877" height="150" key="GridCell.Tab.0.left/0.0.2560.1400/2560.0.1920.1040@2560.0.1920.1040" timestamp="1596560205827" />
-    <state width="1877" height="150" key="GridCell.Tab.0.right" timestamp="1596560205827">
-      <screen x="2560" y="0" width="1920" height="1040" />
-    </state>
-    <state width="2517" height="519" key="GridCell.Tab.0.right/0.0.2560.1400/2560.0.1920.1040@0.0.2560.1400" timestamp="1596558127620" />
-    <state width="1877" height="150" key="GridCell.Tab.0.right/0.0.2560.1400/2560.0.1920.1040@2560.0.1920.1040" timestamp="1596560205827" />
-    <state width="1877" height="150" key="GridCell.Tab.1.bottom" timestamp="1596560205828">
-      <screen x="2560" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="150" key="GridCell.Tab.1.bottom/0.0.2560.1400/2560.0.1920.1040@2560.0.1920.1040" timestamp="1596560205828" />
-    <state width="1877" height="150" key="GridCell.Tab.1.center" timestamp="1596560205828">
-      <screen x="2560" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="150" key="GridCell.Tab.1.center/0.0.2560.1400/2560.0.1920.1040@2560.0.1920.1040" timestamp="1596560205828" />
-    <state width="1877" height="150" key="GridCell.Tab.1.left" timestamp="1596560205827">
-      <screen x="2560" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="150" key="GridCell.Tab.1.left/0.0.2560.1400/2560.0.1920.1040@2560.0.1920.1040" timestamp="1596560205827" />
-    <state width="1877" height="150" key="GridCell.Tab.1.right" timestamp="1596560205828">
-      <screen x="2560" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="150" key="GridCell.Tab.1.right/0.0.2560.1400/2560.0.1920.1040@2560.0.1920.1040" timestamp="1596560205828" />
-    <state width="1877" height="150" key="GridCell.Tab.2.bottom" timestamp="1596560205828">
-      <screen x="2560" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="150" key="GridCell.Tab.2.bottom/0.0.2560.1400/2560.0.1920.1040@2560.0.1920.1040" timestamp="1596560205828" />
-    <state width="1877" height="150" key="GridCell.Tab.2.center" timestamp="1596560205828">
-      <screen x="2560" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="150" key="GridCell.Tab.2.center/0.0.2560.1400/2560.0.1920.1040@2560.0.1920.1040" timestamp="1596560205828" />
-    <state width="1877" height="150" key="GridCell.Tab.2.left" timestamp="1596560205828">
-      <screen x="2560" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="150" key="GridCell.Tab.2.left/0.0.2560.1400/2560.0.1920.1040@2560.0.1920.1040" timestamp="1596560205828" />
-    <state width="1877" height="150" key="GridCell.Tab.2.right" timestamp="1596560205828">
-      <screen x="2560" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="150" key="GridCell.Tab.2.right/0.0.2560.1400/2560.0.1920.1040@2560.0.1920.1040" timestamp="1596560205828" />
-    <state width="1877" height="150" key="GridCell.Tab.3.bottom" timestamp="1596560205828">
-      <screen x="2560" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="150" key="GridCell.Tab.3.bottom/0.0.2560.1400/2560.0.1920.1040@2560.0.1920.1040" timestamp="1596560205828" />
-    <state width="1877" height="150" key="GridCell.Tab.3.center" timestamp="1596560205828">
-      <screen x="2560" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="150" key="GridCell.Tab.3.center/0.0.2560.1400/2560.0.1920.1040@2560.0.1920.1040" timestamp="1596560205828" />
-    <state width="1877" height="150" key="GridCell.Tab.3.left" timestamp="1596560205828">
-      <screen x="2560" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="150" key="GridCell.Tab.3.left/0.0.2560.1400/2560.0.1920.1040@2560.0.1920.1040" timestamp="1596560205828" />
-    <state width="1877" height="150" key="GridCell.Tab.3.right" timestamp="1596560205828">
-      <screen x="2560" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="150" key="GridCell.Tab.3.right/0.0.2560.1400/2560.0.1920.1040@2560.0.1920.1040" timestamp="1596560205828" />
-    <state x="1035" y="410" key="RollbackChangesDialog" timestamp="1597490241311">
-      <screen x="0" y="0" width="2560" height="1400" />
-    </state>
-    <state x="1035" y="410" key="RollbackChangesDialog/0.0.2560.1400/2560.0.1920.1040@0.0.2560.1400" timestamp="1597490241311" />
-    <state x="781" y="345" key="SettingsEditor" timestamp="1597783979102">
-      <screen x="0" y="0" width="2560" height="1400" />
-    </state>
-    <state x="781" y="345" key="SettingsEditor/0.0.2560.1400/2560.0.1920.1040@0.0.2560.1400" timestamp="1597783979102" />
-    <state x="923" y="299" width="714" height="801" key="find.popup" timestamp="1597527107687">
-      <screen x="0" y="0" width="2560" height="1400" />
-    </state>
-    <state x="923" y="299" width="714" height="801" key="find.popup/0.0.2560.1400/2560.0.1920.1040@0.0.2560.1400" timestamp="1597527107687" />
-    <state x="943" y="315" width="672" height="678" key="search.everywhere.popup" timestamp="1597783951408">
-      <screen x="0" y="0" width="2560" height="1400" />
-    </state>
-    <state x="943" y="315" width="672" height="678" key="search.everywhere.popup/0.0.2560.1400/2560.0.1920.1040@0.0.2560.1400" timestamp="1597783951408" />
+    <MESSAGE value="Upgrade Unity to 2020" />
+    <option name="LAST_COMMIT_MESSAGE" value="Upgrade Unity to 2020" />
   </component>
 </project>
