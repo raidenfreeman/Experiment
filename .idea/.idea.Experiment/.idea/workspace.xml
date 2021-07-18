@@ -27,7 +27,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fa80aa0b-be0b-48f7-ab57-a1c1fd0c5a75" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/Assets/Plugins/Demigiant/DOTween/Editor/Imgs/Footer_dark.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Plugins/Demigiant/DOTween/Editor/Imgs/Footer_dark.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Experiment/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Experiment/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,6 +40,7 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B0B14AA5-C62E-4673-B670-BB9AFFBA2E20/3d/a231cbee/FastList`1.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B0B14AA5-C62E-4673-B670-BB9AFFBA2E20/8a/c6a9fa17/BitStreamReader.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://D:/Repos/Experiment/Assets/External Dependencies/InControl/Examples/InterfaceMovement/Button.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B0B14AA5-C62E-4673-B670-BB9AFFBA2E20/c6/69e8198b/WarningGUIBar.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B0B14AA5-C62E-4673-B670-BB9AFFBA2E20/24/72dd3484/ProgressUI.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/External Dependencies/InControl/Editor/ReorderableList/GenericListAdaptor.cs" root0="FORCE_HIGHLIGHTING" />
@@ -56,6 +57,7 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B0B14AA5-C62E-4673-B670-BB9AFFBA2E20/9b/21b43b8f/RigidbodyMotion.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B0B14AA5-C62E-4673-B670-BB9AFFBA2E20/d8/25d0468c/ClientPlayerControlsImpl_Default.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B0B14AA5-C62E-4673-B670-BB9AFFBA2E20/12/c7b185b0/PlayerControlsImpl_OnFire.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://D:/Repos/Experiment/Assets/External Dependencies/InControl/Examples/InterfaceMovement/Button.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Contents.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/UIBillboard.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/StoveSurface.cs" root0="FORCE_HIGHLIGHTING" />
@@ -67,8 +69,8 @@
   </component>
   <component name="IdeDocumentHistory">
     <changedPaths>
-      <option value="$PROJECT_DIR$/Assets/Scripts/Player/PlayerController.cs" />
       <option value="$PROJECT_DIR$/Assets/discord.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Player/PlayerController.cs" />
     </changedPaths>
   </component>
   <component name="ProjectId" id="1fdpJdB3UqaOR2KkN9WA6muSpFm" />
@@ -90,7 +92,7 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.CommitDialog" />
+    <property name="settings.editor.selected.configurable" value="terminal" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
@@ -131,7 +133,7 @@
       <workItem from="1602093038027" duration="30000" />
       <workItem from="1602093447684" duration="266000" />
       <workItem from="1626371534454" duration="596000" />
-      <workItem from="1626620502170" duration="1310000" />
+      <workItem from="1626620502170" duration="2454000" />
     </task>
     <task id="LOCAL-00001" summary="Upgrade Unity to 2020">
       <created>1626620664064</created>
@@ -161,7 +163,35 @@
       <option name="project" value="LOCAL" />
       <updated>1626625134534</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Use package for dotween instead of manual install">
+      <created>1626625360808</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1626625360808</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Remove unused imports">
+      <created>1626625515390</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1626625515390</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Remove empty directories">
+      <created>1626625610972</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1626625610972</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Remove empty directories">
+      <created>1626625626753</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1626625626753</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -203,6 +233,9 @@
     <MESSAGE value="Upgrade Unity to 2020" />
     <MESSAGE value="Update packages" />
     <MESSAGE value="Remove unused stuff" />
-    <option name="LAST_COMMIT_MESSAGE" value="Remove unused stuff" />
+    <MESSAGE value="Use package for dotween instead of manual install" />
+    <MESSAGE value="Remove unused imports" />
+    <MESSAGE value="Remove empty directories" />
+    <option name="LAST_COMMIT_MESSAGE" value="Remove empty directories" />
   </component>
 </project>
