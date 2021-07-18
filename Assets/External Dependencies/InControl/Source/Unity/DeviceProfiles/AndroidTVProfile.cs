@@ -1,7 +1,4 @@
-﻿using System;
-
-
-namespace InControl
+﻿namespace InControl
 {
 	// Tested with ADT-1
 	// Profile by Artūras 'arturaz' Šlajus <arturas@tinylabproductions.com>

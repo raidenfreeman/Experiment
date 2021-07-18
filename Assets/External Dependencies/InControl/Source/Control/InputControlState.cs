@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 #pragma warning disable 0660, 0661

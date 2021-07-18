@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-public enum ContainerType
+﻿public enum ContainerType
 {
     pot,
     plate,

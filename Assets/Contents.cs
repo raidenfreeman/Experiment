@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.UI;
 using Recipe = System.Collections.Generic.Dictionary<ContentType, int>;
 
 public class Contents : MonoBehaviour

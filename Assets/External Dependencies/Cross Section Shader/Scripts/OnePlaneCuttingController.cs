@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using System.Collections;
+
 //[ExecuteInEditMode]
 public class OnePlaneCuttingController : MonoBehaviour {
 

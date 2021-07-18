@@ -1,7 +1,3 @@
-using System;
-using UnityEngine;
-
-
 namespace InControl
 {
 	public enum LogMessageType

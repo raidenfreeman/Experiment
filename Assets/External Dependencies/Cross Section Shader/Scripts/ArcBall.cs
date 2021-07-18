@@ -1,7 +1,6 @@
 ﻿//Source : http://pastebin.com/dcQYCvxG
 
 using UnityEngine;
-using System.Collections;
 
 [ExecuteInEditMode]
 public class ArcBall : MonoBehaviour

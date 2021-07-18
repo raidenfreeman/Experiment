@@ -1,9 +1,7 @@
-﻿using System.Collections;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using Assets.Scripts;
 using InControl;
 
 public class PlayerInteraction : MonoBehaviour

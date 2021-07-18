@@ -1,7 +1,4 @@
-﻿using System;
-
-
-namespace InControl
+﻿namespace InControl
 {
 	[AutoDiscover]
 	public class GoogleNexusPlayerRemoteProfile : UnityInputDeviceProfile
