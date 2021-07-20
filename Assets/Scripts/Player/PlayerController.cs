@@ -3,22 +3,20 @@ using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
-
     public Text hAxis;
     public Text vAxis;
     public Text hAxis2;
     public Text vAxis2;
 
-    [SerializeField]
-    public float speed = 3f;
+    [SerializeField] public float speed = 3f;
 
-    [SerializeField]
-    private Rigidbody _rigidbody;
+    [SerializeField] private Rigidbody _rigidbody;
 
-    [SerializeField]
-    private Transform model;
+    [SerializeField] private Transform model;
 
     private Vector3 movement;
+
+    public bool UseMovePosition = false;
 
     void Awake()
     {
@@ -30,14 +28,25 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        // Move the player around the scene.
-        Move(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        var horizontalRawAxis = Input.GetAxisRaw("Horizontal");
+        var verticalRawAxis = Input.GetAxisRaw("Vertical");
+        if (UseMovePosition)
+        {
+            var newPosition = transform.position + new Vector3(horizontalRawAxis * Time.deltaTime * speed,0,
+                speed * verticalRawAxis * Time.deltaTime);
+            _rigidbody.MovePosition(newPosition);
+        }
+        else
+        {
+            // Move the player around the scene.
+            Move(horizontalRawAxis, verticalRawAxis);
+        }
     }
 
     void Move(float h, float v)
     {
         var mv = new Vector3(h, 0, v).normalized;
-        _rigidbody.velocity = mv * speed;// movement;
+        _rigidbody.velocity = mv * speed; // movement;
 
         if (mv != Vector3.zero)
         {
