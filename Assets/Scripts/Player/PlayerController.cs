@@ -32,7 +32,7 @@ public class PlayerController : MonoBehaviour
         var verticalRawAxis = Input.GetAxisRaw("Vertical");
         if (UseMovePosition)
         {
-            var newPosition = transform.position + speed * Time.deltaTime * new Vector3(horizontalRawAxis,0,
+            var newPosition = transform.position + speed * Time.fixedDeltaTime * new Vector3(horizontalRawAxis,0,
                 verticalRawAxis ).normalized;
             _rigidbody.MovePosition(newPosition);
         }
