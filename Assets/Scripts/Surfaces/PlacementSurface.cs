@@ -31,7 +31,7 @@ public class PlacementSurface : MonoBehaviour
 
         if (placedItem == null)
         {
-            var itemTransform = (item as MonoBehaviour).transform;
+            var itemTransform = (item as MonoBehaviour)?.transform;
             PlaceItemOnSurface(item, itemTransform);
             return true;
         }
@@ -136,8 +136,10 @@ public class PlacementSurface : MonoBehaviour
     private void PlaceItemOnSurface(IPickableItem item, Transform itemTransform)
     {
         itemTransform.parent = placementAnchor;
-        itemTransform.localPosition = Vector3.zero;
-        itemTransform.localPosition = -item.PlacementAnchor.localPosition;
+        Vector3 localPosition;
+        localPosition = Vector3.zero;
+        localPosition = -item.PlacementAnchor.localPosition;
+        itemTransform.localPosition = localPosition;
         itemTransform.localRotation = Quaternion.identity;
         var collider = itemTransform.GetComponent<Collider>();
         if (collider != null)
