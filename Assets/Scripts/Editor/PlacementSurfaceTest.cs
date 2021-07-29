@@ -38,7 +38,7 @@ public class PlacementSurfaceTest
     public void TryPlaceItem_NoItemPlaced_ReturnTruePlacedItemHasChanged()
     {
         var surface = new GameObject().AddComponent<PlacementSurface>();
-        Assert.IsNull(surface.placedItem);
+        Assume.That(surface.placedItem, Is.Null);
         var newItem = new GameObject().AddComponent<FoodIngredient>();
         typeof(FoodIngredient)
             .GetField("placementAnchor", BindingFlags.NonPublic | BindingFlags.Instance)

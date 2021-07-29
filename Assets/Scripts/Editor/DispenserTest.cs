@@ -7,8 +7,9 @@ public class DispenserTest
     [Test]
     public void TryPickUpItem_NoItemsPlaced_SuccessfulyReturnDispensedItemAndPlacedItemEmpty()
     {
+        
         var dispenser = new GameObject().AddComponent<Dispenser>();
-        Assert.IsNull(dispenser.placedItem); // No items are placed
+        Assume.That(dispenser.placedItem, Is.Null);
         var dispensibleItem = new GameObject().AddComponent<FoodIngredient>();
         typeof(Dispenser)
             .GetField("itemToDispense", BindingFlags.NonPublic | BindingFlags.Instance)
@@ -48,7 +49,7 @@ public class DispenserTest
     public void TryPlaceItem_NoItemPlaced_ReturnTruePlacedItemHasChanged()
     {
         var dispenser = new GameObject().AddComponent<Dispenser>();
-        Assert.IsNull(dispenser.placedItem);
+        Assume.That(dispenser.placedItem, Is.Null);
         var newItem = new GameObject().AddComponent<FoodIngredient>();
         typeof(FoodIngredient)
             .GetField("placementAnchor", BindingFlags.NonPublic | BindingFlags.Instance)
