@@ -25,7 +25,7 @@ public class PlacementSurface : MonoBehaviour
     /// </summary>
     /// <param name="item">The MonoBehaviour of the item to place. Must have Rigidbody attached.</param>
     /// <returns>True if successful, false otherwise</returns>
-    public virtual bool TryPlaceItem(IPickableItem item)
+    public bool TryPlaceItem(IPickableItem item)
     {
 
         if (placedItem == null)
