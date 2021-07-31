@@ -12,8 +12,6 @@ namespace CoreSource
         public void TryInteract_NoItemOnSurface_ReturnFalse()
         {
             var surface = new PreparationSurface();
-            //var placementSurface = new GameObject().AddComponent<PlacementSurface>();
-            //typeof(PreparationSurface).GetField("placementSurface", BindingFlags.NonPublic | BindingFlags.Instance).SetValue(surface, placementSurface);
             Assert.IsFalse(surface.TryInteract());
         }
     }
@@ -36,8 +34,6 @@ namespace UnityBridge
         public void TryInteract_NoItemOnSurface_ReturnFalse()
         {
             var surface = new GameObject().AddComponent<PreparationSurface>();
-            //var placementSurface = new GameObject().AddComponent<PlacementSurface>();
-            //typeof(PreparationSurface).GetField("placementSurface", BindingFlags.NonPublic | BindingFlags.Instance).SetValue(surface, placementSurface);
             Assert.IsFalse(surface.TryInteract());
         }
 
@@ -45,7 +41,6 @@ namespace UnityBridge
         public void TryInteract_NotInteractibleItemOnSurface_ReturnFalse()
         {
             var surface = new GameObject().AddComponent<PreparationSurface>();
-            //var placementSurface = new GameObject().AddComponent<PlacementSurface>();
             var pot = new GameObject().AddComponent<Pot>();
             typeof(PreparationSurface)
                 .GetProperty("placedItem", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)
