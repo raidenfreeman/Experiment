@@ -1,41 +1,42 @@
 ﻿using UnityEngine;
 
-
-[RequireComponent(typeof(PlacementSurface))]
-public class SinkSurface : MonoBehaviour, IInteractibleSurface
+namespace UnityBridge
 {
-
-    PlacementSurface placementSurface;
-
-    IPickableItem itemOnSurface
+    [RequireComponent(typeof(PlacementSurface))]
+    public class SinkSurface : MonoBehaviour, IInteractibleSurface
     {
-        get
+
+        PlacementSurface placementSurface;
+
+        IPickableItem itemOnSurface
         {
-            return placementSurface.placedItem;
+            get { return placementSurface.placedItem; }
+        }
+
+        public bool TryInteract()
+        {
+            // If the surface has an item, and we can interact with it
+            if (itemOnSurface != null && itemOnSurface is IWashable)
+            {
+                var interactibleItem = itemOnSurface as IWashable;
+                interactibleItem.Wash(Time.deltaTime);
+                return true;
+            }
+
+            return false;
+        }
+
+        // Use this for initialization
+        void Awake()
+        {
+            placementSurface = placementSurface ?? GetComponent<PlacementSurface>();
+        }
+
+        // Update is called once per frame
+        void Update()
+        {
+
         }
     }
 
-    public bool TryInteract()
-    {
-        // If the surface has an item, and we can interact with it
-        if (itemOnSurface != null && itemOnSurface is IWashable)
-        {
-            var interactibleItem = itemOnSurface as IWashable;
-            interactibleItem.Wash(Time.deltaTime);
-            return true;
-        }
-        return false;
-    }
-
-    // Use this for initialization
-    void Awake()
-    {
-        placementSurface = placementSurface ?? GetComponent<PlacementSurface>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 }

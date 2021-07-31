@@ -1,56 +1,61 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerController : MonoBehaviour
+namespace UnityBridge
 {
-    public Text hAxis;
-    public Text vAxis;
-    public Text hAxis2;
-    public Text vAxis2;
 
-    [SerializeField] public float speed = 3f;
 
-    [SerializeField] private Rigidbody _rigidbody;
-
-    [SerializeField] private Transform model;
-
-    private Vector3 movement;
-
-    public bool UseMovePosition = false;
-
-    void Awake()
+    public class PlayerController : MonoBehaviour
     {
-        if (_rigidbody == null)
-        {
-            _rigidbody = GetComponent<Rigidbody>();
-        }
-    }
+        public Text hAxis;
+        public Text vAxis;
+        public Text hAxis2;
+        public Text vAxis2;
 
-    void FixedUpdate()
-    {
-        var horizontalRawAxis = Input.GetAxisRaw("Horizontal");
-        var verticalRawAxis = Input.GetAxisRaw("Vertical");
-        if (UseMovePosition)
-        {
-            var newPosition = transform.position + speed * Time.fixedDeltaTime * new Vector3(horizontalRawAxis,0,
-                verticalRawAxis ).normalized;
-            _rigidbody.MovePosition(newPosition);
-        }
-        else
-        {
-            // Move the player around the scene.
-            Move(horizontalRawAxis, verticalRawAxis);
-        }
-    }
+        [SerializeField] public float speed = 3f;
 
-    void Move(float h, float v)
-    {
-        var mv = new Vector3(h, 0, v).normalized;
-        _rigidbody.velocity = mv * speed; // movement;
+        [SerializeField] private Rigidbody _rigidbody;
 
-        if (mv != Vector3.zero)
+        [SerializeField] private Transform model;
+
+        private Vector3 movement;
+
+        public bool UseMovePosition = false;
+
+        void Awake()
         {
-            model.rotation = Quaternion.LookRotation(mv, Vector3.up);
+            if (_rigidbody == null)
+            {
+                _rigidbody = GetComponent<Rigidbody>();
+            }
+        }
+
+        void FixedUpdate()
+        {
+            var horizontalRawAxis = Input.GetAxisRaw("Horizontal");
+            var verticalRawAxis = Input.GetAxisRaw("Vertical");
+            if (UseMovePosition)
+            {
+                var newPosition = transform.position + speed * Time.fixedDeltaTime * new Vector3(horizontalRawAxis, 0,
+                    verticalRawAxis).normalized;
+                _rigidbody.MovePosition(newPosition);
+            }
+            else
+            {
+                // Move the player around the scene.
+                Move(horizontalRawAxis, verticalRawAxis);
+            }
+        }
+
+        void Move(float h, float v)
+        {
+            var mv = new Vector3(h, 0, v).normalized;
+            _rigidbody.velocity = mv * speed; // movement;
+
+            if (mv != Vector3.zero)
+            {
+                model.rotation = Quaternion.LookRotation(mv, Vector3.up);
+            }
         }
     }
 }

@@ -1,12 +1,16 @@
 ﻿using UnityEngine;
 
-public class StoveSurface : PlacementSurface {
-
-	void Update () {
-        var cookableItem = placedItem as ICookable;
-		if(cookableItem != null)
+namespace UnityBridge
+{
+    public class StoveSurface : PlacementSurface
+    {
+        void Update()
         {
-            cookableItem.Cook(Time.deltaTime);
+            var cookableItem = placedItem as ICookable;
+            if (cookableItem != null)
+            {
+                cookableItem.Cook(Time.deltaTime);
+            }
         }
-	}
+    }
 }

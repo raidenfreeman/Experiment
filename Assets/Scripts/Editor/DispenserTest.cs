@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using NUnit.Framework;
 using System.Reflection;
+using UnityBridge;
 
 public class DispenserTest
 {
