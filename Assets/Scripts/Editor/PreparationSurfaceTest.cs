@@ -3,6 +3,7 @@ using UnityEngine.TestTools;
 using NUnit.Framework;
 using System.Collections;
 using System.Reflection;
+using UnityBridge;
 
 public class PreparationSurfaceTest
 {

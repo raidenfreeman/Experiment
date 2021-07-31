@@ -1,17 +1,20 @@
 ﻿using UnityEngine;
 
-
-public class PreparationSurface : PlacementSurface, IInteractibleSurface
+namespace UnityBridge
 {
-    public bool TryInteract()
+    public class PreparationSurface : PlacementSurface, IInteractibleSurface
     {
-        var preparableItem = placedItem as IPreparable;
-        // If the surface has an item, and we can interact with it
-        if (preparableItem !=null)
+        public bool TryInteract()
         {
-            preparableItem.Prepare(Time.deltaTime);
-            return true;
+            var preparableItem = placedItem as IPreparable;
+            // If the surface has an item, and we can interact with it
+            if (preparableItem != null)
+            {
+                preparableItem.Prepare(Time.deltaTime);
+                return true;
+            }
+
+            return false;
         }
-        return false;
     }
 }
