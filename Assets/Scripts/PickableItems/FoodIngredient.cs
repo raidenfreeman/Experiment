@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class FoodIngredient : MonoBehaviour, IPickableItem, IPreparable
 {
@@ -125,25 +124,6 @@ public class FoodIngredient : MonoBehaviour, IPickableItem, IPreparable
             //    ProgressBar?.transform.parent.gameObject.SetActive(false);
             //}
         }
-    }
-
-    public void Drop()
-    {
-        throw new NotImplementedException();
-    }
-
-    public void PickUp()
-    {
-        throw new NotImplementedException();
-    }
-
-    public void Place(PlacementSurface surface)
-    {
-        if (surface.GetComponent<SinkSurface>())
-        {
-            throw new ArgumentException("Can't place food in Sink", nameof(surface));
-        }
-        throw new NotImplementedException();
     }
 
     public void Deactivate()

@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 
 public interface ICombinator
@@ -76,21 +75,6 @@ public class Pot : MonoBehaviour, IPickableItem, ICombinator, ICookable
         {
             return placementAnchor;
         }
-    }
-
-    public void Drop()
-    {
-        throw new NotImplementedException();
-    }
-
-    public void PickUp()
-    {
-        throw new NotImplementedException();
-    }
-
-    public void Place(PlacementSurface surface)
-    {
-        throw new NotImplementedException();
     }
 
 

@@ -98,21 +98,6 @@ public class Dish : MonoBehaviour, IPickableItem, IWashable
     /// </summary>
     private float timeSpentWashing = 0;
 
-    public void Drop()
-    {
-        throw new NotImplementedException();
-    }
-
-    public void PickUp()
-    {
-        throw new NotImplementedException();
-    }
-
-    public void Place(PlacementSurface surface)
-    {
-        throw new NotImplementedException();
-    }
-
 
     /// <summary>
     /// Called when the item is washed
