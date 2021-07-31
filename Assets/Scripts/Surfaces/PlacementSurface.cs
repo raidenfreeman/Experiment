@@ -18,7 +18,6 @@ public class PlacementSurface : MonoBehaviour
     /// <summary>
     /// The item placed on the surface
     /// </summary>
-    [SerializeField]
     public IPickableItem placedItem { get; protected set; }
 
     /// <summary>
