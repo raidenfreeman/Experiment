@@ -1,4 +1,4 @@
-﻿internal interface IWashable : IInteractibleItem
+﻿internal interface IWashable
 {
     int Wash(float deltaTime);
 }
