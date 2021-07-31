@@ -60,7 +60,7 @@ public class PlayerInteraction : MonoBehaviour
         }
     }
 
-    private Collider GetHitCollider()
+    private void GetHitCollider()
     {
         var collidersHit = Physics.OverlapSphere(transform.position, reachRadius, 1 << 8);
         collidersDebug = collidersHit;
@@ -70,7 +70,6 @@ public class PlayerInteraction : MonoBehaviour
                 Vector3.Angle(this.forwardReachVector, b.transform.position - this.transform.position)
         );
         selectedColliderDebug = colliderSelected;
-        return colliderSelected;
     }
 
 }
