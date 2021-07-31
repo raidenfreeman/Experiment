@@ -137,7 +137,6 @@ public class PlacementSurface : MonoBehaviour
     {
         itemTransform.parent = placementAnchor;
         Vector3 localPosition;
-        localPosition = Vector3.zero;
         localPosition = -item.PlacementAnchor.localPosition;
         itemTransform.localPosition = localPosition;
         itemTransform.localRotation = Quaternion.identity;
